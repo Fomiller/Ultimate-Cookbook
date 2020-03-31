@@ -13,12 +13,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    }
   }, {});
   Recipe.associate = function(models) {
     // associations can be defined here
     Recipe.belongsTo(models.User, {
       foreignKey: {
-        allowNull:false
+        allowNull: false,
+      }
+    });
+    Recipe.hasMany(models.Comment, {
+      foreignKey: {
+        allowNull: false,
       }
     });
   };

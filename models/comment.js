@@ -5,6 +5,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.TEXT,
       allowNull: false,
     },
+    recipe_id: {
+      type: Sequelize.INTEGER,
+      allNull: false,
+    },
   }, {});
   Comment.associate = function(models) {
     // associations can be defined here
