@@ -26,10 +26,10 @@
       "no-redeclare": "error",
     //   "camelcase": "error",
       "brace-style": "error",
-      "indent": [
-          "error",
-          2
-      ],
+    //   "indent": [
+    //       "error",
+    //       2
+    //   ],
       "linebreak-style": [
           "error",
           "unix"
