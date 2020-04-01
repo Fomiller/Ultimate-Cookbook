@@ -8,8 +8,7 @@ module.exports = function(app){
             res.json(r);
         });
     });
-
-    app.get('api/recipes', function(req,res){
+    app.get('/api/recipes', function(req,res){
         db.Recipe.findAll({}).then(r=>{
             console.log(r);
             res.json(r);
