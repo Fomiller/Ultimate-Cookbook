@@ -4,13 +4,13 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
 
       return queryInterface.bulkInsert('Comments', [{
-        comment_body: 'Amazing Cake',
-        recipe_id: 1,
+        commentBody: 'Amazing Cake',
+        recipeID:,
         createdAt: new Date(),
         updatedAt: new Date(),
       },{
-        comment_body: 'Best Steak Ever!',
-        recipe_id: 2,
+        commentBody: 'Best Steak Ever!',
+        recipeID:,
         createdAt: new Date(),
         updatedAt: new Date(),
       }], {});

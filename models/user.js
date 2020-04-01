@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     password: {
       type: DataTypes.STRING,
@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         len: [8,25],
       },
     },
-    first_name: {
+    firstName: {
       type:DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
-    last_name: {
+    lastName: {
       type:DataTypes.STRING,
       allowNull: false,
     },
@@ -28,12 +28,14 @@ module.exports = (sequelize, DataTypes) => {
         len: [5],
       },
     },
-    bio: DataTypes.TEXT,
-    allowNull: true,
+    bio: {
+      type:DataTypes.TEXT,
+      allowNull: true,
+    },
   }, {});
   User.associate = function(models) {
     // associations can be defined here
-    User.hasMany(models.Recipe, {onDelete: 'cascade'});
+    User.hasMany(models.Recipe);
   };
   return User;
 };
