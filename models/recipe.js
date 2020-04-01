@@ -21,10 +21,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    userID: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    }
   }, {});
   Recipe.associate = function(models) {
     // associations can be defined here

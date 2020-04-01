@@ -1,3 +1,16 @@
 body {
-    background-color: azure;
-}
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    color: #313638;
+    line-height: .5em;
+    background-color: #e8e9eb;
+};
+
+.container {
+    background-color: #C44D42;
+};
+
+.container2 {
+    background-color: #75241D;
+};
+
