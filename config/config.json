@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "527996",
-    "database": "Cookbook_db",
+    "password": "",
+    "database": "cookbook_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
