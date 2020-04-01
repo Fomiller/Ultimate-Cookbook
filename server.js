@@ -12,11 +12,17 @@ app.use(express.static('public'));
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-// Requiring our routes when we build them
-require('./routes/api-routes.js')(app);
-require('./routes/html-routes.js')(app);
+var exphbs = require('express-handlebars');
 
-db.sequelize.sync({ force: true }).then(function() {
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+// Requiring our routes when we build them
+require('./routes/html-routes.js')(app);
+require('./routes/api-routes.js')(app);
+
+
+db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
       console.log('==> 🌎  Listening at http://localhost:' + PORT);
     });
