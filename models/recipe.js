@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Recipe = sequelize.define('Recipe', {
-    recipe_name: {
+    recipeName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -13,9 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: true,
     },
-    user_id: {
+    userID: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     }
   }, {});
   Recipe.associate = function(models) {

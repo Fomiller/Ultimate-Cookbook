@@ -1,13 +1,13 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
-    comment_body: {
+    commentBody: {
       type:DataTypes.TEXT,
       allowNull: false,
     },
-    recipe_id: {
-      type: Sequelize.INTEGER,
-      allNull: false,
+    recipeID: {
+      type: DataTypes.INTEGER,
+      allNull: true,
     },
   }, {});
   Comment.associate = function(models) {

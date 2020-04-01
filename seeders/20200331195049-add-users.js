@@ -6,8 +6,8 @@ module.exports = {
       return queryInterface.bulkInsert('Users', [{
         username: 'GRamsey',
         password: 'password456',
-        first_name: 'Gordon',
-        last_name: 'Ramsey',
+        firstName: 'Gordon',
+        lastName: 'Ramsey',
         email: 'GRamsey@test.com',
         bio:'I am the greatest chef in the world!!!',
         createdAt: new Date(),
@@ -16,8 +16,8 @@ module.exports = {
       {
         username: 'ChefJohn',
         password: 'password123',
-        first_name: 'John',
-        last_name: 'Smith',
+        firstName: 'John',
+        lastName: 'Smith',
         email: 'JohnSmith@test.com',
         bio:'',
         createdAt: new Date(),
