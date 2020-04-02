@@ -16,6 +16,11 @@ module.exports = function(app){
         res.json(req.user);
     });
 
+    app.get('/logout', function(req,res) {
+        req.logout();
+        req.redirect('/');
+    });
+
     // create a user
     app.post('/api/signup', function(req, res) {
         db.User.create({
