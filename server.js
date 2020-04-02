@@ -24,6 +24,6 @@ require('./routes/api-routes.js')(app);
 
 db.sequelize.sync().then(function() {
     app.listen(PORT, function() {
-      console.log('==> 🌎  Listening at http://localhost:' + PORT);
+      console.log('App Listening at http://localhost:' + PORT);
     });
   });
