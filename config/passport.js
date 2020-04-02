@@ -15,13 +15,13 @@ passport.use(new LocalStrategy(
         }).then(function(dbUser) {
             // if there is no user with the given email
             if (!dbUser) {
-                return done(null, false {
+                return done(null, false, {
                     message: 'Incorrect email.'
                 });
 						}
 						// if there is a user with the correct given email but the passowrd is wrong
 						else if (!dbUser.validPassword(password)) {
-							return done(null, false {
+							return done(null, false, {
 								message: 'Incorrect password.'
 							});
 						}
@@ -31,7 +31,7 @@ passport.use(new LocalStrategy(
     }
 ));
 
-// Boiler plates that serialize and deserialize the user 
+// Boiler plates that serialize and deserialize the user
 // makes every thing work. Do not touch!
 passport.serializeUser(function(user, cb) {
 	cb(null, user);

@@ -1,6 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const passport = require('./config/passport');
+const passport = require('passport');
 const db = require('./models');
 
 // create app with express
@@ -27,7 +27,7 @@ require('./routes/api-routes.js')(app);
 require('./routes/html-routes.js')(app);
 
 
-db.sequelize.sync({force: true}).then(function() {
+db.sequelize.sync({force: false}).then(function() {
     app.listen(PORT, function() {
       console.log('App listening at http://localhost:' + PORT);
     });
