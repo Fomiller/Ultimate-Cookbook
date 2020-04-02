@@ -5,6 +5,7 @@ const LocalStrategy = require('passport-local').Strategy;
 db = require('../models');
 
 passport.use(new LocalStrategy(
+
 	{
 		usernameField: 'email'
 	},
@@ -29,6 +30,7 @@ passport.use(new LocalStrategy(
 			return done(null, dbUser);
 		});
 	}
+
 ));
 
 // Boiler plates that serialize and deserialize the user

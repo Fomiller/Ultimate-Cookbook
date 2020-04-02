@@ -13,6 +13,10 @@
                 <form class='signup'>
                     <input class='py-1' type='text' id='email-input' placeholder='Email'>
                     <input class='ml-3 py-1' type='text' id='password-input' placeholder='Password'>
+                    <input class='ml-3' type='text' id='first-name-input' placeholder='John'>
+                    <input class='ml-3' type='text' id='last-name-input' placeholder='Doe'>
+                    <input class='ml-3' type='number' id='age-input' placeholder='18'>
+                    <input class='ml-3' type='text' id='username-input' placeholder='johndoe2'>
                     <button class='btn btn-primary submit ml-3 px-3' type='submit'>Signup</button>
                 </form>
             </div>
@@ -25,7 +29,10 @@
           <div class='card-body'>
             <h2>Featured Recipes</h2>
             <ul>
-              {{{Recipe}}}
+              <li>
+                {{{Recipe}}}
+                <p>Description blurb</p>
+              </li>
             </ul>
           </div>
         </div>
@@ -33,6 +40,3 @@
     </div>
   </div>
 </div>
-
-{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="./public/assets/js/signup.js"></script> --}}

@@ -2,6 +2,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
 const passport = require('./config/passport');
+
 const db = require('./models');
 
 // create app with express
