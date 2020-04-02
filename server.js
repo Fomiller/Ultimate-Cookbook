@@ -1,6 +1,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const session = require('express-session');
 const passport = require('./config/passport');
+
 const db = require('./models');
 
 // create app with express
@@ -14,9 +16,9 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // this code was used for passport session
-// app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -27,7 +29,7 @@ require('./routes/api-routes.js')(app);
 require('./routes/html-routes.js')(app);
 
 
-db.sequelize.sync({force: true}).then(function() {
+db.sequelize.sync({force: false}).then(function() {
     app.listen(PORT, function() {
       console.log('App listening at http://localhost:' + PORT);
     });
