@@ -29,9 +29,17 @@ module.exports = function(app){
     app.get('/members', isAuthenticated, function(req, res) {
         res.render('members');
     });
-    app.get('api/recipes', function(req, res){
+
+    //not used route
+    app.get('recipes', function(req, res){
         console.log('found the page');
         res.json('okii');
+    });
+    //above route not used
+
+    //route to send user to add-recipe view
+    app.get('/add-recipe', function(req, res){
+        res.render('add-recipe');
     });
 
 };
