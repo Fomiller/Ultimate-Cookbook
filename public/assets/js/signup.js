@@ -14,7 +14,7 @@ $document.ready(function() {
         $.post('api/signup', {
             email: email,
             password: password
-        }).then(function(data) {
+        }).then(function() {
             // if signup is successful then the window is redirected to the /members endpoint.
             window.location.replace('/members');
         }).catch(handleLoginErr);
