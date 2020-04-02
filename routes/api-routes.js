@@ -5,9 +5,8 @@ module.exports = function(app){
 
   app.get('/api/users', function(req, res){
         console.log(req.params);
-        db.User.findAll({}).then(r=>{
-            // console.log(r);
-            res.render('add-recipe');
+        db.User.findAll({}).then(()=>{
+            res.render('index');
         });
     });
 
@@ -51,6 +50,7 @@ module.exports = function(app){
         });
     });
 
+    //add a recipe. req.body is already formatted to match our Recipe model
     app.post('/api/add-recipe', function(req, res){
         console.log('req body ', req.body);
         db.Recipe.create(req.body)
