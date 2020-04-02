@@ -1,18 +1,25 @@
 const db = require('../models');
-var passport = require('../config/passport');
+const passport = require('passport');
+
 module.exports = function(app){
-    app.get('/api', function(req, res){
+
+  app.get('/api/users', function(req, res){
         console.log(req.params);
         db.User.findAll({}).then(r=>{
-            console.log(r);
-            res.json(r);
+            // console.log(r);
+            res.render('add-recipe');
         });
     });
 
     // use passport to authenticate the login credentials.
-    app.post('/api/login', passport.authenticate('local'), function(req, res) {
+    app.post('/api/login', passport.authenticate('local', {failureRedirect: '/'}), function(req, res) {
         console.log(req.user);
         res.json(req.user);
+    });
+
+    app.get('/logout', function(req,res) {
+        req.logout();
+        res.redirect('/');
     });
 
     // create a user
@@ -35,5 +42,19 @@ module.exports = function(app){
             console.log(r);
             res.json(r);
         });
+    });
+
+    app.get('/api/comments', function(req,res){
+        db.Comment.findAll({}).then(r=>{
+            console.log(r);
+            res.json(r);
+        });
+    });
+
+    app.post('/api/add-recipe', function(req, res){
+        console.log('req body ', req.body);
+        db.Recipe.create(req.body)
+        .then(()=> res.render('index'))
+        .catch(err => res.status(401).json(err));
     });
 };
