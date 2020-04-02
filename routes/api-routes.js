@@ -1,6 +1,5 @@
 const db = require('../models');
 var passport = require('../config/passport');
-
 module.exports = function(app){
     app.get('/api', function(req, res){
         console.log(req.params);
