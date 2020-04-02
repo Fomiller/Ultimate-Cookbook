@@ -7,10 +7,12 @@ module.exports = {
         commentBody: 'Amazing Cake',
         createdAt: new Date(),
         updatedAt: new Date(),
+        RecipeId: null,
       },{
         commentBody: 'Best Steak Ever!',
         createdAt: new Date(),
         updatedAt: new Date(),
+        RecipeId: null,
       }], {});
 
   },

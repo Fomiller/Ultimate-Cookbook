@@ -5,7 +5,7 @@ $(document).ready(function() {
 
     // declare login function to use below
     function loginUser(email, password) {
-        $.post('api/login', {
+        $.post('/api/login', {
             email: email,
             password: password
         }).then(function() {
@@ -17,6 +17,7 @@ $(document).ready(function() {
 
     loginForm.on('submit', function(event) {
         event.preventDefault();
+        console.log(emailInput.val(), passwordInput.val());
         let userData = {
             email: emailInput.val().trim(),
             password: passwordInput.val().trim()
@@ -30,7 +31,6 @@ $(document).ready(function() {
         emailInput.val('');
         passwordInput.val('');
     });
-
 });
 
 
