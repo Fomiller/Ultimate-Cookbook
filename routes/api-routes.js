@@ -1,10 +1,6 @@
 const db = require('../models');
-<<<<<<< HEAD
 const passport = require('passport');
 
-=======
-var passport = require('../config/passport');
->>>>>>> 17078bdb623ecfd0fd894baf0da92b42f08182ef
 module.exports = function(app){
     app.get('/api', function(req, res){
         console.log(req.params);
