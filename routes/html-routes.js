@@ -15,6 +15,10 @@ module.exports = function(app){
     app.get('/members', function(req, res) {
         res.render('members');
     });
+    app.get('api/recipes', function(req, res){
+        console.log('found the page');
+        res.json('okii');
+    });
 
 };
 

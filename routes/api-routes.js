@@ -3,10 +3,9 @@ const passport = require('passport');
 
 module.exports = function(app){
     app.get('/api', function(req, res){
-        console.log(req.params);
         db.User.findAll({}).then(r=>{
-            console.log(r);
-            res.json(r);
+            // console.log(r);
+            res.render('add-recipe');
         });
     });
 
@@ -43,5 +42,12 @@ module.exports = function(app){
             console.log(r);
             res.json(r);
         });
+    });
+
+    app.post('/api/add-recipe', function(req, res){
+        console.log('req body ', req.body);
+        db.Recipe.create(req.body)
+        .then(()=> res.render('index'))
+        .catch(err => res.status(401).json(err));
     });
 };
