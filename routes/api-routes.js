@@ -8,6 +8,7 @@ module.exports = function(app){
             res.json(r);
         });
     });
+
     // use passport to authenticate the login credentials.
     app.get('/api/login', passport.authenticate('local'), function(req, res) {
             res.json(req.user);
