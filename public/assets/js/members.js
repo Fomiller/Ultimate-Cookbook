@@ -1,6 +1,5 @@
-$(document).readY(function() {
-
-    $('.logout').on('click', function(){
-        $.get('/logout');
-    });
+$(document).ready(function() {
+    // $('.logout').on('click', function(){
+    //     $.get('/logout');
+    // });
 });

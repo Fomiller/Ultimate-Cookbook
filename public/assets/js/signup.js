@@ -1,4 +1,4 @@
-$document.ready(function() {
+$(document).ready(function() {
     let signupForm = $('form.signup');
     let emailInput = $('input#email-input');
     let passwordInput = $('input#password-input');
