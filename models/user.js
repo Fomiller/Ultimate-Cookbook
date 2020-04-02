@@ -1,4 +1,6 @@
 'use strict';
+const bcrypt = require('bcryptjs');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
@@ -33,9 +35,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
   }, {});
-  // User.associate = function(models) {
-  //   // associations can be defined here
-  //   User.hasMany(models.Recipe);
-  // };
+
+  User.associate = function(models) {
+    // associations can be defined here
+    User.hasMany(models.Recipe);
+  };
+  // check for valid password method
+  User.prototype.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+
+  User.addHook('beforeCreate', function(user) {
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+  });
   return User;
 };

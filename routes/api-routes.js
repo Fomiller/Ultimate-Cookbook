@@ -2,7 +2,9 @@ const db = require('../models');
 const passport = require('passport');
 
 module.exports = function(app){
-    app.get('/api', function(req, res){
+
+  app.get('/api/users', function(req, res){
+        console.log(req.params);
         db.User.findAll({}).then(r=>{
             // console.log(r);
             res.render('add-recipe');
@@ -10,9 +12,14 @@ module.exports = function(app){
     });
 
     // use passport to authenticate the login credentials.
-    app.post('/api/login', passport.authenticate('local'), function(req, res) {
+    app.post('/api/login', passport.authenticate('local', {failureRedirect: '/'}), function(req, res) {
         console.log(req.user);
         res.json(req.user);
+    });
+
+    app.get('/logout', function(req,res) {
+        req.logout();
+        res.redirect('/');
     });
 
     // create a user
