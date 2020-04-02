@@ -1,38 +1,50 @@
 <div class='row h-100'>
   <div class='col my-auto'>
-        <div class='row text-center my-3'>
-          <div class='col'>
-          <h2>The Cookbook Recipe App You Love</h2>
-          </div>
-        </div>
-    <div class='row text-center'>
+    <div class='row text-center my-3'>
       <div class='col'>
-        <div class='card'>
-            <div class='card-body'>
-              <h5>Login</h5>
-                <form class='login'>
-                    <input class='py-1' type='text' id='email-input' placeholder='Email'>
-                    <input class='ml-3 py-1' type='text' id='password-input' placeholder='Password'>
-                    <button class='btn btn-primary submit ml-3 px-3' type='submit'>Login</button>
-                </form>
-            </div>
+        <h2>The Cookbook Recipe App You Love</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class='row my-3'>
+    <div class='col'>
+      <div class='card'>
+        <div class='card-body'>
+          <h2>Featured Recipe of the Day</h2>
+          <ul>
+            {{{Recipe}}}
+          </ul>
         </div>
       </div>
     </div>
-    <div class='row my-3'>
-      <div class='col'>
-        <div class='card'>
-          <div class='card-body'>
-            <h2>Featured Recipes</h2>
-            <ul>
-              {{{Recipe}}}
-            </ul>
-          </div>
+  </div>
+
+  <div class='card'>
+    <div class='card-body'>
+      <h2>More Recipes</h2>
+      <div class='row my-3'>
+        <div class='col'>
+          <img>{{{IMG}}}
+        </div>
+        <div class='col'>
+          <img>{{{IMG}}}
+        </div>
+        <div class='col'>
+          <img>{{{IMG}}}
+        </div>
+      </div>
+      <div class='row my-3'>
+        <div class='col'>
+          <img>{{{IMG}}}
+        </div>
+        <div class='col'>
+          <img>{{{IMG}}}
+        </div>
+        <div class='col'>
+          <img>{{{IMG}}}
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
-
