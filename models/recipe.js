@@ -22,18 +22,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
     },
   }, {});
-  // Recipe.associate = function(models) {
-  //   // associations can be defined here
-  //   Recipe.belongsTo(models.User, {
-  //     foreignKey: {
-  //       allowNull: false,
-  //     }
-  //   });
-  //   Recipe.hasMany(models.Comment, {
-  //     foreignKey: {
-  //       allowNull: false,
-  //     }
-  //   });
-  // };
+  Recipe.associate = function(models) {
+    // associations can be defined here
+    Recipe.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: true,
+      }
+    });
+    Recipe.hasMany(models.Comment, {
+      foreignKey: {
+        allowNull: true,
+      }
+    });
+  };
   return Recipe;
 };
