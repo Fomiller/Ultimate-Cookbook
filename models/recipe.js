@@ -26,12 +26,12 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Recipe.belongsTo(models.User, {
       foreignKey: {
-        allowNull: false,
+        allowNull: true,
       }
     });
     Recipe.hasMany(models.Comment, {
       foreignKey: {
-        allowNull: false,
+        allowNull: true,
       }
     });
   };
