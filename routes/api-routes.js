@@ -36,4 +36,11 @@ module.exports = function(app){
             res.json(r);
         });
     });
+
+    app.get('/api/comments', function(req,res){
+        db.Comment.findAll({}).then(r=>{
+            console.log(r);
+            res.json(r);
+        });
+    });
 };
