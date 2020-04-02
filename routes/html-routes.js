@@ -1,4 +1,7 @@
+const path = require('path');
 
+// require custom middleware isAuthtenticated 
+var isAuthtenticated = require('../config/middleware/isAuthenticated');
 
 module.exports = function(app){
     // login in page
