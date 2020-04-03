@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang="en">
 
 <head>
 	<meta charset='UTF-8'>
-	<link rel='stylesheet' href='/assets/css/style.css' type='text/css' />
 	<title>Ultimate Cookbook</title>
 	{{!-- Roboto Font --}}
 	<link href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap' rel='stylesheet'>
@@ -19,11 +18,27 @@
 	<script src='https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js'
 		integrity='sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6'
 		crossorigin='anonymous'></script>
-	<script src='#'></script>
+	{{!-- Custom styles --}}
+	<link rel='stylesheet' href='/assets/css/style.css' type='text/css' />
+
 </head>
 
 <body>
-	{{{ body }}}
+	{{!-- wraps all content in a container --}}
+	<div class='container h-100'>
+		{{{ body }}}
+	</div>
+	<footer class='footer text-center'>
+		<div class='container'>
+			<span> Made by The Chefs || 2020</span>
+		</div>
+	</footer>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/assets/js/login.js"></script>
+	<script src="/assets/js/signup.js"></script>
+	<script src="/assets/js/members.js"></script>
+	<script src='/assets/js/add-recipe.js'></script>
 </body>
 
 </html>

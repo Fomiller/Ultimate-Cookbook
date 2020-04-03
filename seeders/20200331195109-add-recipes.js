@@ -8,12 +8,14 @@ module.exports = {
         instructions: 'Cook for 45 min at 400 degrees.',
         createdAt: new Date(),
         updatedAt: new Date(),
+        UserId: null,
       },{
         recipeName: 'Steak and Potatoes',
         ingredients: 'Steak, Potatoes, Corn',
         instructions: 'Cook the steak to a perfect medium rare, about 6 minutes. cook your baked potatoe to you liking. Steam your corn in the microwave. Plate. Done.',
         createdAt: new Date(),
         updatedAt: new Date(),
+        UserId: null,
       }], {});
   },
 
