@@ -6,13 +6,13 @@ module.exports = function(app){
     // use passport to authenticate the login credentials.
     app.post('/api/login', passport.authenticate('local'), function(req, res) {
 			console.log('From post to api/login', req.user);
-			res.json(req.user);
+			return res.json(req.user);
 		});
 
 		// logout
 		app.get('/logout', function(req,res) {
 			req.logout();
-			res.redirect('/');
+			return res.redirect('/');
     });
 
     // create a user
@@ -27,21 +27,21 @@ module.exports = function(app){
 				lastName: req.body.lastName,
 			}).then(function() {
 				// if successful user directed to login page
-				res.redirect(307, '/api/login');
+				return res.redirect(307, '/api/login');
 			}).catch(function(err) {
 				console.log(err);
-				res.status(401).json(err);
+				return res.status(401).json(err);
 			});
 		});
 
 		app.get('/api/userData', function(req, res) {
 			if (!req.user) {
 				// The user is not logged in, send back an empty object
-				res.json({});
+				return res.json({});
 			} else {
 				// Otherwise send back the user's email and id
 				// Sending back a password, even a hashed password, isn't a good idea
-				res.json({
+				return res.json({
 					email: req.user.email,
 					id: req.user.id
 				});
@@ -51,7 +51,7 @@ module.exports = function(app){
 		// get all users
 		app.get('/api/users', function(req, res){
 			db.User.findAll({}).then(function(data) {
-				res.json(data);
+				return res.json(data);
 			});
 		});
 
@@ -59,7 +59,7 @@ module.exports = function(app){
     app.get('/api/recipes', function(req,res){
 			db.Recipe.findAll({}).then(r=>{
 				console.log(r);
-				res.json(r);
+				return res.json(r);
 			});
     });
 
@@ -67,7 +67,7 @@ module.exports = function(app){
     app.get('/api/comments', function(req,res){
 			db.Comment.findAll({}).then(r=>{
 				console.log(r);
-				res.json(r);
+				return res.json(r);
 			});
     });
 
