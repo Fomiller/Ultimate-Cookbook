@@ -79,22 +79,6 @@ module.exports = function(app){
 			return res.json(r);
 		});
 	});
-		// get all the recipes for a given user
-	app.get('/api/user-recipes/', function(req, res){
-		console.log('req.user in api/user-recipes ', req.user);
-		if (req.user){
-			db.Recipe.findAll({
-				where: {
-					UserId: req.user.id
-				}
-			}).then(results => {
-				res.json(results);
-
-				// below lines to be used when handlebars page is ready
-				// return res.render('user-profile', {recipes: results});
-			}).catch(err => res.status(401).json(err));
-		}
-	});
 
 		// get all comments
     app.get('/api/comments', function(req,res){
