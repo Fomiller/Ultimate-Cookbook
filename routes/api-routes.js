@@ -5,7 +5,7 @@ module.exports = function(app){
 
     // use passport to authenticate the login credentials.
     app.post('/api/login', passport.authenticate('local'), function(req, res) {
-			console.log('From post to api/login', req.user);
+			// console.log('From post to api/login', req.user);
 			return res.json(req.user);
 		});
 
@@ -42,8 +42,12 @@ module.exports = function(app){
 				// Otherwise send back the user's email and id
 				// Sending back a password, even a hashed password, isn't a good idea
 				return res.json({
+					id: req.user.id,
 					email: req.user.email,
-					id: req.user.id
+					username: req.user.username,
+					firstName: req.user.firstName,
+					lastName: req.user.lastName,
+					bio: req.user.bio
 				});
 			}
 		});
