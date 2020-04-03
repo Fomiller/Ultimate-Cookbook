@@ -31,7 +31,7 @@ module.exports = function(app){
     // working correctly. if i restart the server and go to the root and then try to go to '/members' i am redirected to '/'.
     // this is made possible by the isAuthenticated middleware.
 
-    app.get('/members', function(req, res) {
+    app.get('/members',isAuthenticated, function(req, res) {
       if(req.user){
         return res.render('members');
       }else{
@@ -49,5 +49,21 @@ module.exports = function(app){
     app.get('/add-recipe', function(req, res){
       return res.render('add-recipe');
     });
-};
 
+    // user profile
+    app.get('/profile', isAuthenticated, function(req, res) {
+      res.render('user-profile');
+      console.log('profile log ', req.session);
+    });
+
+    // search recipes
+    app.get('/all-recipes', function(req, res) {
+      res.render('all-recipes');
+      console.log('All recipes page');
+    });
+
+    app.get('/recipe-link', function(req, res) {
+      res.render('recipe-link');
+      console.log('recipe link page');
+    });
+};
