@@ -62,10 +62,13 @@ module.exports = function(app){
 
 		// get a single user
 		app.get('/api/users/:id', function(req, res){
+<<<<<<< HEAD
 			let userID = req.params.id;
+=======
+>>>>>>> 6a5011d75d390059ac33c8663874b3023d0d6d88
 			db.User.findOne({
 				where: {
-					id: userID
+					id: req.params.id
 				}
 			}).then(function(data) {
 				return res.json(data);
@@ -77,8 +80,38 @@ module.exports = function(app){
 		db.Recipe.findAll({}).then(r=>{
 			console.log(r);
 			return res.json(r);
+			});
 		});
-	});
+
+		// get recipes based off of UserId
+		app.get('/api/recipes/:id', function(req, res) {
+			db.Recipe.findAll({
+				where: {
+					UserId: req.params.id,
+				}
+			}).then(function(data) {
+				return res.json(data);
+			});
+		});
+
+		// get all the recipes for a given user
+		app.get('/api/user-recipes/', function(req, res){
+			if (req.user){
+				db.Recipe.findAll({
+					where: {
+						UserId: req.user.id
+					}
+				}).then(results => {
+					res.json(results);
+
+					//below lines to be used when handlebars page is ready
+					// return res.render('user-profile', {recipes: results});
+				}).catch(err => res.status(401).json(err));
+			}
+		});
+
+
+
 
 		// get all comments
     app.get('/api/comments', function(req,res){
