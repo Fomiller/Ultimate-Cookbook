@@ -49,14 +49,19 @@ module.exports = function(app){
 
     // user profile
     app.get('/profile', isAuthenticated, function(req, res) {
-      console.log('profile log ', req.session);
       res.render('user-profile');
+      console.log('profile log ', req.session);
     });
 
     // search recipes
     app.get('/all-recipes', function(req, res) {
-      res.render('browse-recipe');
+      res.render('all-recipes');
       console.log('All recipes page');
-    })
+    });
+
+    app.get('/recipe-link', function(req, res) {
+      res.render('recipe-link');
+      console.log('recipe link page');
+    });
 };
 
