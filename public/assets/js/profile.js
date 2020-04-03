@@ -5,13 +5,12 @@ $(document).ready(function() {
   let bioField = $('#user-bio');
 
   $.get('/api/userData').then( function(data){
-
-    console.log('userdata', data);
+    // console.log('userdata', data.id);
     usernameField.text(data.username);
     firstnameField.text(data.firstName);
     lastnameField.text(data.lastName);
     bioField.text(data.bio);
+    return UserId = data.id;
   });
-
 
 });
