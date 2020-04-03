@@ -34,6 +34,7 @@ module.exports = function(app){
 			});
 		});
 
+
 		app.get('/api/userData', function(req, res) {
 			if (!req.user) {
 				// The user is not logged in, send back an empty object
@@ -52,12 +53,12 @@ module.exports = function(app){
 			}
 		});
 
-		// get all users
-		app.get('/api/users', function(req, res){
-			db.User.findAll({}).then(function(data) {
-				return res.json(data);
-			});
+	// get all users
+	app.get('/api/users', function(req, res){
+		db.User.findAll({}).then(function(data) {
+			return res.json(data);
 		});
+	});
 
 		// get a single user
 		app.get('/api/users/:id', function(req, res){
@@ -73,24 +74,66 @@ module.exports = function(app){
 
 		// get all recipes
     app.get('/api/recipes', function(req,res){
-			db.Recipe.findAll({}).then(r=>{
-				console.log(r);
-				return res.json(r);
-			});
-    });
+		db.Recipe.findAll({}).then(r=>{
+			console.log(r);
+			return res.json(r);
+		});
+	});
+		// get all the recipes for a given user
+	app.get('/api/user-recipes/', function(req, res){
+		if (req.user){
+			db.Recipe.findAll({
+				where: {
+					RecipeId: req.user.id
+				}
+			}).then(results => {
+				res.json(results);
+
+				//below lines to be used when handlebars page is ready
+				// return res.render('user-profile', {recipes: results});
+			}).catch(err => res.status(401).json(err));
+		}
+	});
 
 		// get all comments
     app.get('/api/comments', function(req,res){
-			db.Comment.findAll({}).then(r=>{
-				console.log(r);
-				return res.json(r);
-			});
+		db.Comment.findAll({}).then(r=>{
+			console.log(r);
+			return res.json(r);
+		});
     });
 
     //add a recipe. req.body is already formatted to match our Recipe model
     app.post('/api/add-recipe', function(req, res){
-        db.Recipe.create(req.body)
-        .then(()=> res.render('index'))
-        .catch(err => res.status(401).json(err));
-    });
+		if (req.user){ //if user is logged in, attribute the recipe to their user id
+			recipe = req.body;
+			recipe.UserId = req.user.id;
+			console.log('recipe in api/add-recipe ', recipe);
+			db.Recipe.create(recipe)
+			.then(()=> res.render('user-profile'))
+			.catch(err => res.status(401).json(err));
+		} else { //otherwise make an anonyous recipe
+			db.Recipe.create(req.body)
+			.then(()=> res.render('index'))
+			.catch(err => res.status(401).json(err));
+		}
+	});
+
+	//delete user with id in request parameters
+	app.delete('/api/user/:id', function(req,res){
+		db.User.destroy({
+			where: {
+				id: req.params.id
+			}
+		}).then(user => res.json(user));
+	});
+
+	//delete recipe that has the id in request parameters
+	app.delete('/api/recipe/:id', function(req, res){
+		db.Recipe.destroy({
+			where: {
+				id: req.params.id
+			}
+		}).then(recipe => res.json(recipe));
+	});
 };
