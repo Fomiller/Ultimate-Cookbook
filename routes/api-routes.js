@@ -124,7 +124,7 @@ module.exports = function(app){
 			recipe.UserId = req.user.id;
 			console.log('recipe in api/add-recipe ', recipe);
 			db.Recipe.create(recipe)
-			.then(()=> res.render('user-profile'))
+			.then(()=> res.render('profile'))
 			.catch(err => res.status(401).json(err));
 		} else { //otherwise make an anonyous recipe
 			db.Recipe.create(req.body)

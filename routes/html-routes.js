@@ -60,7 +60,7 @@ module.exports = function(app){
       }).then(results => {
 				let recipes = results.map(r => r.dataValues);
 				// below lines to be used when handlebars page is ready
-				return res.render('user-profile', {Recipe: recipes});
+				return res.render('profile', {Recipe: recipes});
 			}).catch(err => res.status(401).json(err));
     });
 
