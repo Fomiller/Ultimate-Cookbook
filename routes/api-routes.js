@@ -73,8 +73,35 @@ module.exports = function(app){
 
     //add a recipe. req.body is already formatted to match our Recipe model
     app.post('/api/add-recipe', function(req, res){
-        db.Recipe.create(req.body)
-        .then(()=> res.render('index'))
-        .catch(err => res.status(401).json(err));
-    });
+		if (req.user){
+			recipe = req.body;
+			recipe.UserId = req.user.id;
+			console.log('recipe in api/add-recipe ', recipe);
+			db.Recipe.create(recipe)
+			.then(()=> res.render('user-profile'))
+			.catch(err => res.status(401).json(err));
+		} else {
+			db.Recipe.create(req.body)
+			.then(()=> res.render('index'))
+			.catch(err => res.status(401).json(err));
+		}
+	});
+
+	//delete user with id in request parameters
+	app.delete('/api/user/:id', function(req,res){
+		db.User.destroy({
+			where: {
+				id: req.params.id
+			}
+		}).then(user => res.json(user));
+	});
+
+	//delete recipe that has the id in request parameters
+	app.delete('/api/recipe/:id', function(req, res){
+		db.Recipe.destroy({
+			where: {
+				id: req.params.id
+			}
+		}).then(recipe => res.json(recipe));
+	});
 };
