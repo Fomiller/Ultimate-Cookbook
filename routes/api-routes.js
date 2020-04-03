@@ -90,7 +90,7 @@ module.exports = function(app){
 			}).then(results => {
 				res.json(results);
 
-				//below lines to be used when handlebars page is ready
+				// below lines to be used when handlebars page is ready
 				// return res.render('user-profile', {recipes: results});
 			}).catch(err => res.status(401).json(err));
 		}
