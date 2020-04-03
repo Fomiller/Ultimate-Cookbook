@@ -53,7 +53,6 @@ module.exports = function(app){
     // user profile
     app.get('/profile', isAuthenticated, function(req, res) {
       res.render('user-profile');
-      console.log('profile log ', req.session);
     });
 
     // search recipes
