@@ -73,7 +73,6 @@ module.exports = function(app){
 
     //add a recipe. req.body is already formatted to match our Recipe model
     app.post('/api/add-recipe', function(req, res){
-        console.log('req body ', req.body);
         db.Recipe.create(req.body)
         .then(()=> res.render('index'))
         .catch(err => res.status(401).json(err));
