@@ -59,6 +59,18 @@ module.exports = function(app){
 			});
 		});
 
+		// get a single user
+		app.get('/api/users/:id', function(req, res){
+			let userID = req.params.id
+			db.User.findOne({
+				where: {
+					id: userID
+				}
+			}).then(function(data) {
+				return res.json(data);
+			});
+		});
+
 		// get all recipes
     app.get('/api/recipes', function(req,res){
 			db.Recipe.findAll({}).then(r=>{
