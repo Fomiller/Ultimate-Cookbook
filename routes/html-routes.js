@@ -32,23 +32,13 @@ module.exports = function(app){
     // working correctly. if i restart the server and go to the root and then try to go to '/members' i am redirected to '/'.
     // this is made possible by the isAuthenticated middleware.
 
+    // route is NOT being used ATM
     app.get('/members',isAuthenticated, function(req, res) {
       if(req.user){
         return res.render('members');
       }else{
         return res.redirect('/login');
       }
-    });
-
-    //not used route
-    app.get('/recipes', function(req, res){
-        console.log('found the page');
-        return res.render('add-recipe');
-    });
-
-    //this should be in api routes
-    app.get('/add-recipe', function(req, res){
-      return res.render('add-recipe');
     });
 
     // user profile
@@ -58,10 +48,28 @@ module.exports = function(app){
           UserId: req.user.id,
         }
       }).then(results => {
-				let recipes = results.map(r => r.dataValues);
+        let recipes = results.map(r => r.dataValues);
 				// below lines to be used when handlebars page is ready
 				return res.render('profile', {Recipe: recipes});
 			}).catch(err => res.status(401).json(err));
+    });
+
+    app.get('/user/:id', function(req, res) {
+      return res.render('user');
+    });
+
+    //RECIPE ROUTES
+    // =========================================================================
+
+    //not used route
+    app.get('/recipes', function(req, res){
+      console.log('found the page');
+      return res.render('add-recipe');
+    });
+
+    //this should be in api routes
+    app.get('/add-recipe', function(req, res){
+      return res.render('add-recipe');
     });
 
     // search recipes
