@@ -11,6 +11,7 @@ $(document).ready(function() {
     firstnameField.text(data.firstName);
     lastnameField.text(data.lastName);
     bioField.text(data.bio);
-
   });
+
+
 });
