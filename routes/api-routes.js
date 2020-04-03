@@ -17,6 +17,7 @@ module.exports = function(app){
 
     // create a user
     app.post('/api/signup', function(req, res) {
+			console.log('signup ',req.body);
 			db.User.create({
 				// create values based off of req body
 				email: req.body.email,
@@ -28,6 +29,7 @@ module.exports = function(app){
 				// if successful user directed to login page
 				res.redirect(307, '/api/login');
 			}).catch(function(err) {
+				console.log(err);
 				res.status(401).json(err);
 			});
 		});
