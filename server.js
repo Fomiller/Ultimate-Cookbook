@@ -1,16 +1,15 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
+// required passport from configured file
 const passport = require('./config/passport');
 
+// set up port and requiring models for syncing
+const PORT = process.env.PORT || 8080;
 const db = require('./models');
 
 // create app with express
 const app = express();
-
-// define port
-const PORT = process.env.PORT || 8080;
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
@@ -30,7 +29,7 @@ require('./routes/html-routes.js')(app);
 
 
 db.sequelize.sync({force: false}).then(function() {
-    app.listen(PORT, function() {
-      console.log('App listening at http://localhost:' + PORT);
-    });
+  app.listen(PORT, function() {
+    console.log('App listening at http://localhost:' + PORT);
   });
+});
