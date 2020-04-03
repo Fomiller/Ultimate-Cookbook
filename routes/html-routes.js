@@ -7,6 +7,7 @@ module.exports = function(app){
     // if you are a user then members is RENDERED.
     app.get('/', function(req, res){
       if (req.user) {
+        console.log('we were here');
         res.redirect('/members');
       }
       // if you are not a logged in user login is RENDERED
@@ -38,13 +39,12 @@ module.exports = function(app){
     //not used route
     app.get('/recipes', function(req, res){
         console.log('found the page');
-        res.json('okii');
+        res.render('add-recipe');
     });
 
     //this should be in api routes
-    app.get('api/recipes', function(req, res){
-      console.log('found the page');
-      res.json('okii');
+    app.get('/add-recipe', function(req, res){
+      res.render('add-recipe');
     });
 };
 
