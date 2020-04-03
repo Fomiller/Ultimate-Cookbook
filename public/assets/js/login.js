@@ -9,7 +9,7 @@ $(document).ready(function() {
             email: email,
             password: password
         }).then(function() {
-            window.location.replace('/members');
+            window.location.replace('/profile');
         }).catch(function(err) {
             console.log(err);
         });

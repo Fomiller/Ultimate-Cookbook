@@ -5,7 +5,7 @@ module.exports = function(app){
 
     // use passport to authenticate the login credentials.
     app.post('/api/login', passport.authenticate('local'), function(req, res) {
-			console.log('From post to api/login', req.user);
+			// console.log('From post to api/login', req.user);
 			return res.json(req.user);
 		});
 
@@ -34,19 +34,24 @@ module.exports = function(app){
 			});
 		});
 
-	app.get('/api/userData', function(req, res) {
-		if (!req.user) {
-			// The user is not logged in, send back an empty object
-			return res.json({});
-		} else {
-			// Otherwise send back the user's email and id
-			// Sending back a password, even a hashed password, isn't a good idea
-			return res.json({
-				email: req.user.email,
-				id: req.user.id
-			});
-		}
-	});
+
+		app.get('/api/userData', function(req, res) {
+			if (!req.user) {
+				// The user is not logged in, send back an empty object
+				return res.json({});
+			} else {
+				// Otherwise send back the user's email and id
+				// Sending back a password, even a hashed password, isn't a good idea
+				return res.json({
+					id: req.user.id,
+					email: req.user.email,
+					username: req.user.username,
+					firstName: req.user.firstName,
+					lastName: req.user.lastName,
+					bio: req.user.bio
+				});
+			}
+		});
 
 	// get all users
 	app.get('/api/users', function(req, res){
@@ -54,6 +59,18 @@ module.exports = function(app){
 			return res.json(data);
 		});
 	});
+
+		// get a single user
+		app.get('/api/users/:id', function(req, res){
+			let userID = req.params.id
+			db.User.findOne({
+				where: {
+					id: userID
+				}
+			}).then(function(data) {
+				return res.json(data);
+			});
+		});
 
 		// get all recipes
     app.get('/api/recipes', function(req,res){
