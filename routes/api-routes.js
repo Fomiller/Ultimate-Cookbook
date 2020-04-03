@@ -62,10 +62,6 @@ module.exports = function(app){
 
 		// get a single user
 		app.get('/api/users/:id', function(req, res){
-<<<<<<< HEAD
-			let userID = req.params.id;
-=======
->>>>>>> 6a5011d75d390059ac33c8663874b3023d0d6d88
 			db.User.findOne({
 				where: {
 					id: req.params.id
