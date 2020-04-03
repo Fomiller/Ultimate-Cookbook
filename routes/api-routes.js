@@ -62,7 +62,7 @@ module.exports = function(app){
 
 		// get a single user
 		app.get('/api/users/:id', function(req, res){
-			let userID = req.params.id
+			let userID = req.params.id;
 			db.User.findOne({
 				where: {
 					id: userID
@@ -81,10 +81,11 @@ module.exports = function(app){
 	});
 		// get all the recipes for a given user
 	app.get('/api/user-recipes/', function(req, res){
+		console.log('req.user in api/user-recipes ', req.user);
 		if (req.user){
 			db.Recipe.findAll({
 				where: {
-					RecipeId: req.user.id
+					UserId: req.user.id
 				}
 			}).then(results => {
 				res.json(results);
