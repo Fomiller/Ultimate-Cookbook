@@ -2,6 +2,7 @@ const db = require('../models');
 const passport = require('passport');
 
 module.exports = function(app){
+
     // use passport to authenticate the login credentials.
     app.post('/api/login', passport.authenticate('local'), function(req, res) {
 			console.log('From post to api/login', req.user);
@@ -68,6 +69,7 @@ module.exports = function(app){
 			});
     });
 
+    //add a recipe. req.body is already formatted to match our Recipe model
     app.post('/api/add-recipe', function(req, res){
         console.log('req body ', req.body);
         db.Recipe.create(req.body)
