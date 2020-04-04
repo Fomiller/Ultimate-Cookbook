@@ -43,17 +43,49 @@ module.exports = function(app){
 
     // user profile
     app.get('/profile', isAuthenticated, function(req, res) {
-      db.Recipe.findAll({
+      // find user that by id that matches req.params.id
+      // include the Recipe table that matches the user(id).
+      db.User.findOne({
         where: {
-          UserId: req.user.id,
-        }
-      }).then(results => {
-        // map results to a new array to render in handlebars
-        let recipes = results.map(r => r.dataValues);
-				// below lines to be used when handlebars page is ready
-				return res.render('profile', {Recipe: recipes});
-			}).catch(err => res.status(401).json(err));
+          id: req.user.id
+        },
+        include: [db.Recipe]
+      }).then(users => {
+        let usersDV = users.dataValues;
+        // stringify the return object so we can access array values
+        let usersJSON = JSON.stringify(users, null, 2);
+        // create a json object
+        let data = JSON.parse(usersJSON);
+        // create an array from the recipes array inside data
+        let recipes = data.Recipes.map(o => o);
+        // create an array that contains an object that has key value pairs matching the users info.
+        let userData = [{
+          id: usersDV.id,
+          username:usersDV.username,
+          firstName:usersDV.firstName,
+          lastName:usersDV.lastName,
+          email:usersDV.email,
+          bio:usersDV.bio,
+        }];
+        // render the user template that has 2 partials one for rendering the users info one for handling the users recipes.
+        console.log(userData);
+        console.log(recipes);
+        return res.render('profile', {Recipe: recipes, User: userData});
+      }).catch(err => res.status(401).json(err));
     });
+    // // user profile
+    // app.get('/profile', isAuthenticated, function(req, res) {
+    //   db.Recipe.findAll({
+    //     where: {
+    //       UserId: req.user.id,
+    //     }
+    //   }).then(results => {
+    //     // map results to a new array to render in handlebars
+    //     let recipes = results.map(r => r.dataValues);
+		// 		// below lines to be used when handlebars page is ready
+		// 		return res.render('profile', {Recipe: recipes});
+		// 	}).catch(err => res.status(401).json(err));
+    // });
 
 
     app.get('/user/:id', function(req, res) {
