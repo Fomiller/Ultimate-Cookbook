@@ -111,10 +111,10 @@ module.exports = function(app){
     // =========================================================================
 
     //not used route
-    app.get('/recipes', function(req, res){
-      console.log('found the page');
-      return res.render('add-recipe');
-    });
+    // app.get('/recipes', function(req, res){
+    //   console.log('found the page');
+    //   return res.render('add-recipe');
+    // });
 
     //this should be in api routes
     app.get('/add-recipe', function(req, res){
@@ -122,13 +122,13 @@ module.exports = function(app){
     });
 
     // search recipes
-    app.get('/all-recipes', function(req, res) {
+    app.get('/recipes', function(req, res) {
       db.Recipe.findAll({
         include: [db.User]
       }).then(recipes => {
         let recipesJSON = JSON.stringify(recipes,null,2);
         let data = JSON.parse(recipesJSON);
-        res.render('all-recipes', {Recipe: data});
+        res.render('recipes', {Recipe: data});
       });
     });
 
