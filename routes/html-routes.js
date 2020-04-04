@@ -1,7 +1,7 @@
 // require custom middleware isAuthenticated
 var isAuthenticated = require('../config/middleware/isAuthenticated');
 const db = require('../models');
-const Op = ('Sequelize.Op');
+
 module.exports = function(app){
 
     // Root.
@@ -37,6 +37,7 @@ module.exports = function(app){
     // members page, served after successful login
     // working correctly. if i restart the server and go to the root and then try to go to '/members' i am redirected to '/'.
     // this is made possible by the isAuthenticated middleware.
+
     // route is NOT being used ATM
     app.get('/members', isAuthenticated, function(req, res) {
       if(req.user){
@@ -109,17 +110,6 @@ module.exports = function(app){
 
     //RECIPE ROUTES
     // =========================================================================
-
-    //not used route
-    // app.get('/recipes', function(req, res){
-    //   console.log('found the page');
-    //   return res.render('add-recipe');
-    // });
-
-    //this should be in api routes
-    app.get('/add-recipe', function(req, res){
-      return res.render('add-recipe');
-    });
 
     // search recipes
     app.get('/recipes', function(req, res) {
