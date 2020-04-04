@@ -1,7 +1,7 @@
 // require custom middleware isAuthenticated
 var isAuthenticated = require('../config/middleware/isAuthenticated');
 const db = require('../models');
-
+const Op = ('Sequelize.Op');
 module.exports = function(app){
 
     // Root.
