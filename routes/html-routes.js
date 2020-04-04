@@ -43,7 +43,7 @@ module.exports = function(app){
 
     // user profile
     app.get('/profile', isAuthenticated, function(req, res) {
-      // find user that by id that matches req.params.id
+      // find user that by id that matches req.user.id
       // include the Recipe table that matches the user(id).
       db.User.findOne({
         where: {
@@ -73,20 +73,6 @@ module.exports = function(app){
         return res.render('profile', {Recipe: recipes, User: userData});
       }).catch(err => res.status(401).json(err));
     });
-    // // user profile
-    // app.get('/profile', isAuthenticated, function(req, res) {
-    //   db.Recipe.findAll({
-    //     where: {
-    //       UserId: req.user.id,
-    //     }
-    //   }).then(results => {
-    //     // map results to a new array to render in handlebars
-    //     let recipes = results.map(r => r.dataValues);
-		// 		// below lines to be used when handlebars page is ready
-		// 		return res.render('profile', {Recipe: recipes});
-		// 	}).catch(err => res.status(401).json(err));
-    // });
-
 
     app.get('/user/:id', function(req, res) {
       // find user that by id that matches req.params.id
