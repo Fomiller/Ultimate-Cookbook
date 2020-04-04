@@ -151,15 +151,4 @@ module.exports = function(app){
 		}).then(recipe => res.json(recipe));
 	});
 
-	app.get('/join/:id', function(req, res) {
-		db.User.findOne({
-			where: {
-				id: req.params.id
-			},
-			include: [db.Recipe]
-		}).then(data => res.json(data));
-	});
-
-
-
 };
