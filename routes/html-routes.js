@@ -81,7 +81,7 @@ module.exports = function(app){
         where: {
           id: req.params.id
         },
-        include: [db.Recipe]
+          include: [db.Recipe]
       }).then(users => {
         let usersDV = users.dataValues;
         // stringify the return object so we can access array values
@@ -120,7 +120,9 @@ module.exports = function(app){
 
     // search recipes
     app.get('/all-recipes', function(req, res) {
-      db.Recipe.findAll({}).then(recipes => {
+      db.Recipe.findAll({
+        include: [db.User]
+      }).then(recipes => {
         let recipesJSON = JSON.stringify(recipes,null,2);
         let data = JSON.parse(recipesJSON);
         console.log(data);
