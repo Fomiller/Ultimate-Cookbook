@@ -2,23 +2,29 @@
         <div class='card'>
             <div class='card-body'>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-6">
                         <h1 id='username'>{{username}}</h1>
-                        <a href="/logout"><button class="btn btn-primary">Logout</button></a>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row my-1">
                     <div class="col-md-6">
-                        <h4 id='first-name'>{{firstName}}</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 id='last-name'>{{lastName}}</h4>
+                        <div class="">
+                        <h5 class="d-inline text-muted" id='first-name'>{{firstName}}</h5>
+                        <h5 class="d-inline text-muted" id='first-name'>{{lastName}}</h5>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                    <p>Bio</p>
-                    <p id='#user-bio'>{{bio}}</p>
+                        <h5>Bio:</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <p id='#user-bio'>{{bio}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
