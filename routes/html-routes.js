@@ -5,10 +5,13 @@ const db = require('../models');
 module.exports = function(app){
 
     // Root.
-    // if you are a user then members is RENDERED.
+    // I think this could use some looking at...
+    // where do we want people to go if they are logged in?
+    // do we want a standard landing page for the site?
     app.get('/', function(req, res){
       if (req.user) {
-        console.log('we were here');
+        // if loged in you are directed to your profile.
+        console.log('Root html path, for logged in user, should redirect to users profile');
         return res.redirect('/profile');
       }
       // if you are not a logged in user login is RENDERED
@@ -16,24 +19,26 @@ module.exports = function(app){
     });
 
     app.get('/login', function(req, res) {
-      console.log(req.user);
       if (req.user) {
-        return res.redirect('/members');
+        return res.redirect('/profile');
       }
-      return res.render('index');
+      return res.render('login');
     });
 
     // signup page
     app.get('/signup', function(req, res) {
-      return res.render('signup');
+      if(req.user) {
+        return res.redirect('/profile');
+      } else {
+        return res.render('signup');
+      }
     });
 
     // members page, served after successful login
     // working correctly. if i restart the server and go to the root and then try to go to '/members' i am redirected to '/'.
     // this is made possible by the isAuthenticated middleware.
-
     // route is NOT being used ATM
-    app.get('/members',isAuthenticated, function(req, res) {
+    app.get('/members', isAuthenticated, function(req, res) {
       if(req.user){
         return res.render('members');
       }else{
@@ -68,8 +73,6 @@ module.exports = function(app){
           bio:usersDV.bio,
         }];
         // render the user template that has 2 partials one for rendering the users info one for handling the users recipes.
-        console.log(userData);
-        console.log(recipes);
         return res.render('profile', {Recipe: recipes, User: userData});
       }).catch(err => res.status(401).json(err));
     });
