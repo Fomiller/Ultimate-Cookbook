@@ -122,9 +122,9 @@ module.exports = function(app){
 		if (req.user){ //if user is logged in, attribute the recipe to their user id
 			recipe = req.body;
 			recipe.UserId = req.user.id;
-			console.log('recipe in api/add-recipe ', recipe);
+			console.log('Added recipe: ', recipe);
 			db.Recipe.create(recipe)
-			.then(()=> res.render('user-profile'))
+			.then(()=> res.render('profile'))
 			.catch(err => res.status(401).json(err));
 		} else { //otherwise make an anonyous recipe
 			db.Recipe.create(req.body)
@@ -150,4 +150,5 @@ module.exports = function(app){
 			}
 		}).then(recipe => res.json(recipe));
 	});
+
 };

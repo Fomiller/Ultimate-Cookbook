@@ -1,0 +1,33 @@
+{{#each User}}
+        <div class='card'>
+            <div class='card-body'>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 id='username'>{{username}}</h1>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
+                    </div>
+                </div>
+                <div class="row my-1">
+                    <div class="col-md-6">
+                        <div class="">
+                        <h5 class="d-inline text-muted" id='first-name'>{{firstName}}</h5>
+                        <h5 class="d-inline text-muted" id='first-name'>{{lastName}}</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5>Bio:</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <p id='#user-bio'>{{bio}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{> profile/profile-add-recipe-block}}
+            </div>
+        </div>
+{{/each}}

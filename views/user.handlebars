@@ -1,0 +1,14 @@
+<div class='row h-100'>
+    <div class='col my-auto'>
+        {{> users/user-info-block}}
+        <div class="card mt-5 mb-2">
+            <div class="card-body">
+                <h3>Recipes</h3>
+            </div>
+        </div>
+        <div class="accordion" id="accordionExample">
+            {{> users/user-recipe-block}}
+        </div>
+    </div>
+</div>
+<script src='/assets/js/user.js'></script>
