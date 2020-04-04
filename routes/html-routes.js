@@ -120,8 +120,12 @@ module.exports = function(app){
 
     // search recipes
     app.get('/all-recipes', function(req, res) {
-      res.render('all-recipes');
-      console.log('All recipes page');
+      db.Recipe.findAll({}).then(recipes => {
+        let recipesJSON = JSON.stringify(recipes,null,2);
+        let data = JSON.parse(recipesJSON);
+        console.log(data);
+        res.render('all-recipes', {Recipe: data});
+      });
     });
 
     app.get('/recipe-link', function(req, res) {
