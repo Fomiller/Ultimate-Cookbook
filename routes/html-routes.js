@@ -9,7 +9,7 @@ module.exports = function(app){
     app.get('/', function(req, res){
       if (req.user) {
         console.log('we were here');
-        return res.redirect('/members');
+        return res.redirect('/profile');
       }
       // if you are not a logged in user login is RENDERED
       return res.render('login');
