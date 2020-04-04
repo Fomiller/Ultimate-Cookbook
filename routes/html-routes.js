@@ -128,7 +128,6 @@ module.exports = function(app){
       }).then(recipes => {
         let recipesJSON = JSON.stringify(recipes,null,2);
         let data = JSON.parse(recipesJSON);
-        console.log(data);
         res.render('all-recipes', {Recipe: data});
       });
     });
