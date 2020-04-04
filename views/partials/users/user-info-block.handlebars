@@ -1,0 +1,25 @@
+{{#each User}}
+        <div class='card'>
+            <div class='card-body'>
+                <div class="row">
+                    <div class="col">
+                        <h1 id='username'>{{username}}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 id='first-name'>{{firstName}}</h4>
+                    </div>
+                    <div class="col-md-6">
+                        <h4 id='last-name'>{{lastName}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                    <p>Bio</p>
+                    <p id='#user-bio'>{{bio}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+{{/each}}
