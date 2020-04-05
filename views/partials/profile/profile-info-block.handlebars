@@ -46,8 +46,12 @@
                         <label for="bio{{id}}">Bio:</label>
                         <div class="card">
                             <div class="card-body">
-                                <p id='#user-bio' class="user-info">{{bio}}</p>
-                                <input id="bio{{id}}" class="info-input" type="text" value="{{bio}}">
+                                <div class="row">
+                                    <div class="col">
+                                        <p id='#user-bio' class="user-info my-0">{{bio}}</p>
+                                        <input id="bio{{id}}" class="info-input" type="text" value="{{bio}}" style="width: 100%;">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
