@@ -1,5 +1,6 @@
 const db = require('../models');
 const passport = require('passport');
+const { Op } = require('sequelize');
 
 module.exports = function(app){
 
@@ -76,6 +77,25 @@ module.exports = function(app){
 		db.Recipe.findAll({}).then(r=>{
 			console.log(r);
 			return res.json(r);
+			});
+		});
+
+		app.get('/api/recipes/:search', function(req,res){
+			let search =req.params.search;
+			db.Recipe.findAll({
+				where:{
+					[Op.or]:
+					[
+						{recipeName:{[Op.substring]:`%${search}%`}},
+						{ingredients:{[Op.substring]:`%${search}%`}},
+						{instructions:{[Op.substring]:`%${search}%`}},
+						{description:{[Op.substring]:`%${search}%`}},
+						{chefComments:{[Op.substring]:`%${search}%`}}
+					]
+				},
+				include:[db.User, db.Comment]
+			}).then(function(data) {
+				return res.json(data);
 			});
 		});
 
