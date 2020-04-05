@@ -36,23 +36,23 @@ module.exports = function(app){
 		});
 
 
-		app.get('/api/userData', function(req, res) {
-			if (!req.user) {
-				// The user is not logged in, send back an empty object
-				return res.json({});
-			} else {
-				// Otherwise send back the user's email and id
-				// Sending back a password, even a hashed password, isn't a good idea
-				return res.json({
-					id: req.user.id,
-					email: req.user.email,
-					username: req.user.username,
-					firstName: req.user.firstName,
-					lastName: req.user.lastName,
-					bio: req.user.bio
-				});
-			}
-		});
+	app.get('/api/userData', function(req, res) {
+		if (!req.user) {
+			// The user is not logged in, send back an empty object
+			return res.json({});
+		} else {
+			// Otherwise send back the user's email and id
+			// Sending back a password, even a hashed password, isn't a good idea
+			return res.json({
+				id: req.user.id,
+				email: req.user.email,
+				username: req.user.username,
+				firstName: req.user.firstName,
+				lastName: req.user.lastName,
+				bio: req.user.bio
+			});
+		}
+	});
 
 	// get all users
 	app.get('/api/users', function(req, res){
@@ -112,33 +112,45 @@ module.exports = function(app){
 			});
 		});
 
-		// get recipes based off of UserId
-		app.get('/api/recipes/:id', function(req, res) {
+	// get recipes based off of UserId
+	app.get('/api/recipes/:id', function(req, res) {
+		db.Recipe.findAll({
+			where: {
+				UserId: req.params.id,
+			}
+		}).then(function(data) {
+			return res.json(data);
+		});
+	});
+
+	// get all the recipes for a given user
+	app.get('/api/user-recipes/', function(req, res){
+		if (req.user){
 			db.Recipe.findAll({
 				where: {
-					UserId: req.params.id,
+					UserId: req.user.id
 				}
-			}).then(function(data) {
-				return res.json(data);
-			});
-		});
+			}).then(results => {
+				res.json(results);
 
-		// get all the recipes for a given user
-		app.get('/api/user-recipes/', function(req, res){
-			if (req.user){
-				db.Recipe.findAll({
-					where: {
-						UserId: req.user.id
-					}
-				}).then(results => {
-					res.json(results);
+				//below lines to be used when handlebars page is ready
+				// return res.render('user-profile', {recipes: results});
+			}).catch(err => res.status(401).json(err));
+		}
+	});
 
-					//below lines to be used when handlebars page is ready
-					// return res.render('user-profile', {recipes: results});
-				}).catch(err => res.status(401).json(err));
-			}
-		});
-
+	app.put('/api/bio/:id', function(req, res){
+		console.log('req.body ', req.body);
+		console.log('req.params.id ', req.params.id);
+		db.User.update(
+			req.body,
+			{
+				where: {
+					id:req.params.id
+				}
+			}).then(r => res.json(r))
+			.catch(err=> res.status(401).json(err));
+	});
 
 
 
