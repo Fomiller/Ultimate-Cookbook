@@ -2,14 +2,12 @@
         <div class='card'>
             <div class='card-body'>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <h1 id='username' class="user-info">{{username}}</h1>
                         <label for="username{{id}}" class="info-input">Username</label>
+                        <input id="username{{id}}" class="info-input float-right" type="text" value="{{username}}">
                     </div>
-                    <div class="col-md-3">
-                        <input id="username{{id}}" class="info-input" type="text" value="{{username}}">
-                    </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-8 text-right">
                         <button id="edit-info" class="btn btn-outline-primary btn-sm" data-id="{{id}}">Edit</button>
                         <button id="update-info" class="btn btn-outline-success btn-sm" data-id="{{id}}">Save</button>
                         <a href="/logout"><button class="btn btn-outline-danger btn-sm">Logout</button></a>
@@ -24,19 +22,15 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="first{{id}}" class="info-input">First Name</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input id="first{{id}}" class="info-input" type="text" value="{{firstName}}">
+                                <input id="first{{id}}" class="info-input float-right" type="text" value="{{firstName}}">
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <label for="last{{id}}" class="info-input">Last Name</label>
-                            </div>
-                            <div class="col-md-3">
-                                <input id="last{{id}}" class="info-input" type="text" value="{{lastName}}">
+                                <input id="last{{id}}" class="info-input float-right" type="text" value="{{lastName}}">
                             </div>
                         </div>
                     </div>
