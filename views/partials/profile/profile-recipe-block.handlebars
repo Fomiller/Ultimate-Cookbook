@@ -12,19 +12,28 @@
     <div id="collapse{{id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body">
             <div>
-                <h5>Description:</h5>
-                <p>{{description}}</p>
-                <h5>Instructions:</h5>
-                <p>{{instructions}}</p>
-                <h5>Ingredients:</h5>
-                <p>{{ingredients}}</p>
-                <h5>Chef Comments:</h5>
-                <p>{{chefComments}}</p>
-                <p>{{Rating}}</p>
-                <p>{{Category}}</p>
+                <form class="edit-recipe{{id}}" action="">
+                    <h5>Description:</h5>
+                    <p>{{description}}</p>
+                    <input id='desc-form{{id}}' class="recipe-input" type="text" data-edit={{id}} value="{{description}}" style="display: none;">
+                    <h5>Instructions:</h5>
+                    <p>{{instructions}}</p>
+                    <input id='inst-form{{id}}' class="recipe-input" type="text" data-edit={{id}} value="{{instructions}}" style="display: none;">
+                    <h5>Ingredients:</h5>
+                    <p>{{ingredients}}</p>
+                    <input id='ingred-form{{id}}' class="recipe-input" type="text" data-edit={{id}} value="{{ingredients}}" style="display: none;">
+                    <h5>Chef Comments:</h5>
+                    <p>{{chefComments}}</p>
+                    <input id='chef-form{{id}}' class="recipe-input" type="text" data-edit={{id}} value="{{chefComments}}" style="display: none;">
+                    <p>{{Rating}}</p>
+                    <p>{{Category}}</p>
+                </form>
             </div>
             <div>
                 <button class="btn btn-danger del-btn" data-id='{{id}}'>Delete</button>
+                <button class="btn btn-primary edit-btn" data-id='{{id}}'>Edit</button>
+                <button class="btn btn-success save-btn" type="submit" data-id='{{id}}' data-save='{{id}}'>Save</button>
+
             </div>
         </div>
     </div>
