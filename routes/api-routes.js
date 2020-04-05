@@ -61,56 +61,69 @@ module.exports = function(app){
 		});
 	});
 
-		// get a single user
-		app.get('/api/users/:id', function(req, res){
-			db.User.findOne({
+	// update a user
+	app.put('/api/users', function(req, res) {
+		db.User.update(
+			req.body,
+			{
 				where: {
-					id: req.params.id
+					id: req.body.id
 				}
 			}).then(function(data) {
 				return res.json(data);
-			});
-		});
+			}).catch(err => res.status(401).json(err));
+	});
 
-		// get all recipes
-    app.get('/api/recipes', function(req,res){
-		db.Recipe.findAll({}).then(r=>{
-			console.log(r);
-			return res.json(r);
-			});
+	// get a single user
+	app.get('/api/users/:id', function(req, res){
+		db.User.findOne({
+			where: {
+				id: req.params.id
+			}
+		}).then(function(data) {
+			return res.json(data);
 		});
+	});
 
-		app.put('/api/recipes', function(req, res) {
-			console.log('route', req.body);
-			db.Recipe.update(
-				req.body,
-				{
-					where: {
-						id: req.body.id
-					}
-				}).then(function(data) {
-					return res.json(data);
-				}).catch(err => res.status(401).json(err));
+	// get all recipes
+	app.get('/api/recipes', function(req,res){
+	db.Recipe.findAll({}).then(r=>{
+		console.log(r);
+		return res.json(r);
 		});
+	});
 
-		app.get('/api/recipes/:search', function(req,res){
-			let search =req.params.search;
-			db.Recipe.findAll({
-				where:{
-					[Op.or]:
-					[
-						{recipeName:{[Op.substring]:`%${search}%`}},
-						{ingredients:{[Op.substring]:`%${search}%`}},
-						{instructions:{[Op.substring]:`%${search}%`}},
-						{description:{[Op.substring]:`%${search}%`}},
-						{chefComments:{[Op.substring]:`%${search}%`}}
-					]
-				},
-				include:[db.User, db.Comment]
+	app.put('/api/recipes', function(req, res) {
+		console.log('route', req.body);
+		db.Recipe.update(
+			req.body,
+			{
+				where: {
+					id: req.body.id
+				}
 			}).then(function(data) {
 				return res.json(data);
-			});
+			}).catch(err => res.status(401).json(err));
+	});
+
+	app.get('/api/recipes/:search', function(req,res){
+		let search =req.params.search;
+		db.Recipe.findAll({
+			where:{
+				[Op.or]:
+				[
+					{recipeName:{[Op.substring]:`%${search}%`}},
+					{ingredients:{[Op.substring]:`%${search}%`}},
+					{instructions:{[Op.substring]:`%${search}%`}},
+					{description:{[Op.substring]:`%${search}%`}},
+					{chefComments:{[Op.substring]:`%${search}%`}}
+				]
+			},
+			include:[db.User, db.Comment]
+		}).then(function(data) {
+			return res.json(data);
 		});
+	});
 
 	// get recipes based off of UserId
 	app.get('/api/recipes/:id', function(req, res) {
