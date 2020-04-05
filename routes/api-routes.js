@@ -163,7 +163,7 @@ module.exports = function(app){
 	});
 
 	//delete recipe that has the id in request parameters
-	app.delete('/api/recipe/:id', function(req, res){
+	app.delete('/api/recipes/:id', function(req, res){
 		db.Recipe.destroy({
 			where: {
 				id: req.params.id
