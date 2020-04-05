@@ -24,6 +24,23 @@
 </head>
 
 <body>
+	{{!-- navbar to display on all pages with links to some other pages --}}
+	<nav class="navbar navbar-expand-sm navbar-light bg-light align-content-sm-center">
+        <a class="navbar-brand" href="#">Ultimate Cookbook</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-row-reverse align-content-sm-center" id="navbarNav">    
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                    <a class="nav-link" href="/all-recipes">Recipes <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="/profile">My Profile</a>
+                    </li>
+                </ul>
+            </div>
+    </nav>
 	{{!-- wraps all content in a container --}}
 	<div class='container page-container'>
 		<div class="content-wrapper">
