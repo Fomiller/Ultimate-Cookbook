@@ -8,8 +8,7 @@
                   <h2>{{recipeName}}</h2>
                 </div>
                 <div class="col-md-6 text-right">
-                  {{!-- this is different from recipe-block because the way the search query is returned UserId and username are part of the same object and not a seperate object --}}
-                  <a href="/user/{{UserId}}"><h2>{{username}}</h2></a>
+                  <a href="/user/{{User.id}}"><h2>{{User.username}}</h2></a>
                 </div>
               </div>
                 <h4>Description</h4>
@@ -20,6 +19,19 @@
                 <p>{{ingredients}}</p>
                 <h4>Chef Comments</h4>
                 <p>{{chefComments}}</p>
+              <div class="card">
+                <div class="card-body">
+                <h4>Comments</h4>
+                      {{#each Comments}}  
+                  <div class="card mb-1">
+                    <div class="card-body py-1">
+                        <p class="my-1">{{commentBody}}</p>
+                    </div>
+                  </div>
+                      {{/each}}
+
+                </div>
+              </div>
             </div>
         </div>
     </div>
