@@ -114,10 +114,15 @@ module.exports = function(app){
     // search recipes
     app.get('/recipes', function(req, res) {
       db.Recipe.findAll({
-        include: [db.User]
+        include: [db.User, db.Comment]
       }).then(recipes => {
         let recipesJSON = JSON.stringify(recipes,null,2);
         let data = JSON.parse(recipesJSON);
+        // now have an array of all columns but how will each comment be displayed in the template to be with the correct recipe???
+        // LEAVING THIS FOR REFERENCE MIGHT WANT TO PICK FROM IT...
+        // let test = [];
+        // data.map(o => o.Comments.forEach(element => test.push(element)));
+        // console.log(recipesJSON);
         res.render('recipes', {Recipe: data});
       });
     });
