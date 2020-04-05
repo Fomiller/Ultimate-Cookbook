@@ -11,6 +11,12 @@ $(document).ready(function() {
   let chefCommentsInput = $('#chef-comments');
   let addRecipeForm = $('form.add-recipe');
   let deleteBtn = $('.del-btn');
+  let editBtn = $('.edit-btn');
+  let saveBtn = $('.save-btn');
+
+
+
+  saveBtn.hide();
 
 
   function deleteRecipe(id) {
@@ -57,7 +63,7 @@ $(document).ready(function() {
       }).then(function(data) {
         // reload page
         console.log('profile.js');
-        window.location.replace('/profile')
+        window.location.replace('/profile');
       }).catch(err => res.status(401).json(err));
     }
 
@@ -70,9 +76,55 @@ $(document).ready(function() {
     chefCommentsInput.val('');
   });
 
-  deleteBtn.on('click', function(){
-    var btnId = $(this).data('id');
+
+
+  deleteBtn.on('click', function() {
+    let btnId = $(this).data('id');
     deleteRecipe(btnId);
+  });
+
+  editBtn.on('click', function() {
+    let btnId = $(this).data('id');
+    let save = $(this).siblings('.save-btn');
+    let recipeInputs = document.querySelectorAll(`[data-edit='${btnId}']`);
+    // toggles display classes for the inputs of that recipe.
+    recipeInputs.forEach(o => {
+      if (o.style.display === 'none') {
+        o.style.display = 'block';
+      } else {
+        o.style.display = 'none';
+      }
+    });
+    // display the save button
+    save.toggle();
+  });
+
+  function updateRecipe(recipe) {
+    $.ajax({
+      method: 'PUT',
+      url: '/api/recipes',
+      data: recipe
+    }).then(function(data) {
+      window.location.replace('/profile');
+    });
+  }
+
+
+  saveBtn.on('click', function() {
+    let btnId = $(this).data('id');
+    let descInput = $(`#desc-form${btnId}`).val();
+    let instInput = $(`#inst-form${btnId}`).val();
+    let ingredInput = $(`#ingred-form${btnId}`).val();
+    let chefInput = $(`#chef-form${btnId}`).val();
+    let dataOBJ = {
+      id: btnId,
+      description: descInput,
+      instructions: instInput,
+      ingredients: ingredInput,
+      chefComments: chefInput,
+    };
+    updateRecipe(dataOBJ);
+
   });
 
 });
