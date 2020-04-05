@@ -3,17 +3,24 @@
             <div class='card-body'>
                 <div class="row">
                     <div class="col-md-6">
-                        <h1 id='username'>{{username}}</h1>
+                        <h1 id='username' class="user-info">{{username}}</h1>
+                        <input id="username{{id}}" class="info-input" type="text" value="{{username}}">
                     </div>
                     <div class="col-md-6 text-right">
+                        <button id="edit-info" class="btn btn-outline-primary" data-id="{{id}}">Edit</button>
+                        <button id="update-info" class="btn btn-outline-success" data-id="{{id}}">Save</button>
                         <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
                     </div>
                 </div>
                 <div class="row my-1">
                     <div class="col-md-6">
-                        <div class="">
-                        <h5 class="d-inline text-muted" id='first-name'>{{firstName}}</h5>
-                        <h5 class="d-inline text-muted" id='first-name'>{{lastName}}</h5>
+                        <div class="user-info">
+                            <h5 class="d-inline text-muted" id='first-name'>{{firstName}}</h5>
+                            <h5 class="d-inline text-muted" id='first-name'>{{lastName}}</h5>
+                        </div>
+                        <div>
+                            <input id="first{{id}}" class="info-input" type="text" value="{{firstName}}">
+                            <input id="last{{id}}" class="info-input" type="text" value="{{lastName}}">
                         </div>
                     </div>
                 </div>
@@ -22,13 +29,13 @@
                         <h5>Bio:</h5>
                         <div class="card">
                             <div class="card-body">
-                                <p id='#user-bio'>{{bio}}</p>
-                                <a href='/user/{{id}}'><button class='btn-info'>Edit Bio</button></a>
+                                <p id='#user-bio' class="user-info">{{bio}}</p>
+                                <input id="bio{{id}}" class="info-input" type="text" value="{{bio}}">
                             </div>
                         </div>
                     </div>
                 </div>
-                {{> profile/profile-add-recipe-block}}
             </div>
         </div>
+        {{> profile/profile-add-recipe-block}}
 {{/each}}
