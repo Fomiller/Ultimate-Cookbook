@@ -80,24 +80,37 @@ module.exports = function(app){
 			});
 		});
 
-	app.get('/api/recipes/:search', function(req,res){
-		let search =req.params.search;
-		db.Recipe.findAll({
-			where:{
-				[Op.or]:
-				[
-					{recipeName:{[Op.substring]:`%${search}%`}},
-					{ingredients:{[Op.substring]:`%${search}%`}},
-					{instructions:{[Op.substring]:`%${search}%`}},
-					{description:{[Op.substring]:`%${search}%`}},
-					{chefComments:{[Op.substring]:`%${search}%`}}
-				]
-			},
-			include:[db.User, db.Comment]
-		}).then(function(data) {
-			return res.json(data);
+		app.put('/api/recipes', function(req, res) {
+			console.log('route', req.body);
+			db.Recipe.update(
+				req.body,
+				{
+					where: {
+						id: req.body.id
+					}
+				}).then(function(data) {
+					return res.json(data);
+				}).catch(err => res.status(401).json(err));
 		});
-	});
+
+		app.get('/api/recipes/:search', function(req,res){
+			let search =req.params.search;
+			db.Recipe.findAll({
+				where:{
+					[Op.or]:
+					[
+						{recipeName:{[Op.substring]:`%${search}%`}},
+						{ingredients:{[Op.substring]:`%${search}%`}},
+						{instructions:{[Op.substring]:`%${search}%`}},
+						{description:{[Op.substring]:`%${search}%`}},
+						{chefComments:{[Op.substring]:`%${search}%`}}
+					]
+				},
+				include:[db.User, db.Comment]
+			}).then(function(data) {
+				return res.json(data);
+			});
+		});
 
 	// get recipes based off of UserId
 	app.get('/api/recipes/:id', function(req, res) {
@@ -175,7 +188,7 @@ module.exports = function(app){
 	});
 
 	//delete recipe that has the id in request parameters
-	app.delete('/api/recipe/:id', function(req, res){
+	app.delete('/api/recipes/:id', function(req, res){
 		db.Recipe.destroy({
 			where: {
 				id: req.params.id
