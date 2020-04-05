@@ -1,0 +1,27 @@
+{{#each Recipe}}
+  <div class='row'>
+    <div class='col my-1'>
+        <div class='card'>
+            <div class='card-body'>
+              <div class="row">
+                <div class="col-md-6">
+                  <h2>{{recipeName}}</h2>
+                </div>
+                <div class="col-md-6 text-right">
+                  {{!-- this is different from recipe-block because the way the search query is returned UserId and username are part of the same object and not a seperate object --}}
+                  <a href="/user/{{UserId}}"><h2>{{username}}</h2></a>
+                </div>
+              </div>
+                <h4>Description</h4>
+                <p>{{description}}</p>
+                <h4>Instructions</h4>
+                <p>{{instructions}}</p>
+                <h4>Ingredients</h4>
+                <p>{{ingredients}}</p>
+                <h4>Chef Comments</h4>
+                <p>{{chefComments}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

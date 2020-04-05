@@ -37,6 +37,7 @@ module.exports = function(app){
     // members page, served after successful login
     // working correctly. if i restart the server and go to the root and then try to go to '/members' i am redirected to '/'.
     // this is made possible by the isAuthenticated middleware.
+
     // route is NOT being used ATM
     app.get('/members', isAuthenticated, function(req, res) {
       if(req.user){
@@ -110,30 +111,30 @@ module.exports = function(app){
     //RECIPE ROUTES
     // =========================================================================
 
-    //not used route
-    app.get('/recipes', function(req, res){
-      console.log('found the page');
-      return res.render('add-recipe');
-    });
-
-    //this should be in api routes
-    app.get('/add-recipe', function(req, res){
-      return res.render('add-recipe');
-    });
-
     // search recipes
-    app.get('/all-recipes', function(req, res) {
+    app.get('/recipes', function(req, res) {
       db.Recipe.findAll({
         include: [db.User]
       }).then(recipes => {
         let recipesJSON = JSON.stringify(recipes,null,2);
         let data = JSON.parse(recipesJSON);
-        res.render('all-recipes', {Recipe: data});
+        res.render('recipes', {Recipe: data});
       });
     });
+
 
     app.get('/recipe-link', function(req, res) {
       res.render('recipe-link');
       console.log('recipe link page');
+    });
+
+    app.get('/search/:recipe', function(req, res) {
+      let search = req.params.recipe;
+      // second argument only returns what is selected from the columns, if left out then the meta data will come back in an array.
+      db.sequelize.query(`SELECT * FROM cookbook_db.recipes JOIN cookbook_db.users ON (users.id = recipes.UserId) WHERE recipeName LIKE '%${search}%' OR ingredients LIKE '%${search}%' OR recipes.description LIKE '%${search}%';`,{ type: db.sequelize.QueryTypes.SELECT})
+      .then(function(data){
+          console.log('data: ', data);
+          return res.render('search', {Recipe: data});
+        }).catch(err => res.status(401).json(err));
     });
 };
