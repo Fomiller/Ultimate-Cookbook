@@ -46,7 +46,7 @@ $(document).ready(function() {
       }).then(function(data) {
         // reload page
         console.log('profile.js');
-        window.location.replace('/profile')
+        window.location.replace('/profile');
       }).catch(err => res.status(401).json(err));
     }
 
