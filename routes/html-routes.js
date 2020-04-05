@@ -1,6 +1,8 @@
 // require custom middleware isAuthenticated
 var isAuthenticated = require('../config/middleware/isAuthenticated');
 const db = require('../models');
+const { Op } = require('sequelize');
+// const Op = db.sequelize;
 
 module.exports = function(app){
 
@@ -31,18 +33,6 @@ module.exports = function(app){
         return res.redirect('/profile');
       } else {
         return res.render('signup');
-      }
-    });
-
-    // members page, served after successful login
-    // working correctly. if i restart the server and go to the root and then try to go to '/members' i am redirected to '/'.
-    // this is made possible by the isAuthenticated middleware.
-    // route is NOT being used ATM
-    app.get('/members', isAuthenticated, function(req, res) {
-      if(req.user){
-        return res.render('members');
-      }else{
-        return res.redirect('/login');
       }
     });
 
@@ -110,30 +100,72 @@ module.exports = function(app){
     //RECIPE ROUTES
     // =========================================================================
 
-    //not used route
-    app.get('/recipes', function(req, res){
-      console.log('found the page');
-      return res.render('add-recipe');
-    });
-
-    //this should be in api routes
-    app.get('/add-recipe', function(req, res){
-      return res.render('add-recipe');
-    });
-
     // search recipes
-    app.get('/all-recipes', function(req, res) {
+    app.get('/recipes', function(req, res) {
       db.Recipe.findAll({
-        include: [db.User]
+        include: [db.User, db.Comment]
       }).then(recipes => {
         let recipesJSON = JSON.stringify(recipes,null,2);
         let data = JSON.parse(recipesJSON);
-        res.render('all-recipes', {Recipe: data});
+        // now have an array of all columns but how will each comment be displayed in the template to be with the correct recipe???
+        // LEAVING THIS FOR REFERENCE MIGHT WANT TO PICK FROM IT...
+        // let test = [];
+        // data.map(o => o.Comments.forEach(element => test.push(element)));
+        // console.log(recipesJSON);
+        res.render('recipes', {Recipe: data});
       });
     });
+
 
     app.get('/recipe-link', function(req, res) {
       res.render('recipe-link');
       console.log('recipe link page');
     });
+
+    // SEARCH ROUTES
+    // =========================================================================
+
+    app.get('/search', function(req, res) {
+      res.render('search');
+    });
+
+    app.get('/search/:search', function(req, res) {
+			let search =req.params.search;
+			db.Recipe.findAll({
+				where:{
+					[Op.or]:
+					[
+						{recipeName:{[Op.substring]:`%${search}%`}},
+						{ingredients:{[Op.substring]:`%${search}%`}},
+						{instructions:{[Op.substring]:`%${search}%`}},
+						{description:{[Op.substring]:`%${search}%`}},
+						{chefComments:{[Op.substring]:`%${search}%`}}
+					]
+				},
+				include:[db.User, db.Comment]
+			}).then(function(searches){
+        // returned data needs to be stringified then parsed in order to be used
+        let searchesJSON = JSON.stringify(searches,null,2);
+        let data = JSON.parse(searchesJSON);
+
+        return res.render('search', {Recipe: data});
+        }).catch(err => res.status(401).json(err));
+    });
+
+
+    // DONT WANT TO DELETE JUST YET!!!
+
+    // app.get('/search/:recipe', function(req, res) {
+    //   let searchBody =req.body.recipe;
+    //   let search = req.params.recipe;
+    //   console.log(searchBody);
+    //   // second argument only returns what is selected from the columns, if left out then the meta data will come back in an array.
+    //   // Had to use a MySql query because sequelize wouldnt work.
+    //   db.sequelize.query(`SELECT * FROM cookbook_db.recipes JOIN cookbook_db.users ON (users.id = recipes.UserId) WHERE recipeName LIKE '%${search}%' OR ingredients LIKE '%${search}%' OR recipes.description LIKE '%${search}%';`,{ type: db.sequelize.QueryTypes.SELECT})
+    //   .then(function(data){
+    //       console.log('data: ', data);
+    //       return res.render('search', {Recipe: data});
+    //     }).catch(err => res.status(401).json(err));
+    // });
+
 };

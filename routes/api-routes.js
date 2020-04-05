@@ -1,5 +1,6 @@
 const db = require('../models');
 const passport = require('passport');
+const { Op } = require('sequelize');
 
 module.exports = function(app){
 
@@ -79,6 +80,25 @@ module.exports = function(app){
 			});
 		});
 
+		app.get('/api/recipes/:search', function(req,res){
+			let search =req.params.search;
+			db.Recipe.findAll({
+				where:{
+					[Op.or]:
+					[
+						{recipeName:{[Op.substring]:`%${search}%`}},
+						{ingredients:{[Op.substring]:`%${search}%`}},
+						{instructions:{[Op.substring]:`%${search}%`}},
+						{description:{[Op.substring]:`%${search}%`}},
+						{chefComments:{[Op.substring]:`%${search}%`}}
+					]
+				},
+				include:[db.User, db.Comment]
+			}).then(function(data) {
+				return res.json(data);
+			});
+		});
+
 		// get recipes based off of UserId
 		app.get('/api/recipes/:id', function(req, res) {
 			db.Recipe.findAll({
@@ -149,6 +169,17 @@ module.exports = function(app){
 				id: req.params.id
 			}
 		}).then(recipe => res.json(recipe));
+	});
+
+	app.get('/api/all-recipes/:recipe', function(req,res) {
+		let search = req.params.recipe;
+		console.log('search: ',search);
+		// second argument only returns what is selected from the columns, if left out then the meta data will come back in an array.
+		db.sequelize.query(`SELECT * FROM cookbook_db.recipes JOIN cookbook_db.users ON (users.id = recipes.UserId) WHERE recipeName LIKE '%${search}%' OR ingredients LIKE '%${search}%' OR recipes.description LIKE '%${search}%';`,{ type: db.sequelize.QueryTypes.SELECT})
+		.then(function(data){
+				// console.log('data: ', data);
+				return res.json(data);
+			}).catch(err => res.status(401).json(err));
 	});
 
 };
