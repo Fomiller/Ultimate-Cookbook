@@ -15,9 +15,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-10">
                     <p>Bio</p>
-                    <p id='#user-bio'>{{bio}}</p>
+                     <textarea placeholder="{{bio}}" class='form-control' rows='10' id='bio'></textarea>
+                     {{!-- hidden <p> to store the user id --}}
+                    <p hidden id='user-id'>{{id}}</p>
+                    </div>
+                    <div class='col-md-2'>
+                        <a href='/api/update-bio/{{id}}'><button class='btn-info' id='save-bio'>Save Bio</button></a>
                     </div>
                 </div>
             </div>
