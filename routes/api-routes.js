@@ -80,6 +80,19 @@ module.exports = function(app){
 			});
 		});
 
+		app.put('/api/recipes', function(req, res) {
+			console.log('route', req.body);
+			db.Recipe.update(
+				req.body,
+				{
+					where: {
+						id: req.body.id
+					}
+				}).then(function(data) {
+					return res.json(data);
+				}).catch(err => res.status(401).json(err));
+		});
+
 		app.get('/api/recipes/:search', function(req,res){
 			let search =req.params.search;
 			db.Recipe.findAll({
