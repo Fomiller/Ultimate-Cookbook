@@ -1,6 +1,5 @@
 const db = require('../models');
 const passport = require('passport');
-const Op = ('Sequelize.Op');
 
 module.exports = function(app){
 
@@ -152,15 +151,15 @@ module.exports = function(app){
 		}).then(recipe => res.json(recipe));
 	});
 
-	// app.get('/api/all-recipes/:recipe', function(req,res) {
-	// 	let search = req.params.recipe;
-	// 	console.log('search: ',search);
-	// 	// second argument only returns what is selected from the columns, if left out then the meta data will come back in an array.
-	// 	db.sequelize.query(`SELECT * FROM cookbook_db.recipes WHERE recipeName LIKE '%${search}%' OR ingredients LIKE '%${search}%' OR description LIKE '%${search}%'`,{ type: db.sequelize.QueryTypes.SELECT})
-	// 	.then(function(data){
-	// 			// console.log('data: ', data);
-	// 			return res.json(data);
-	// 		}).catch(err => res.status(401).json(err));
-	// });
+	app.get('/api/all-recipes/:recipe', function(req,res) {
+		let search = req.params.recipe;
+		console.log('search: ',search);
+		// second argument only returns what is selected from the columns, if left out then the meta data will come back in an array.
+		db.sequelize.query(`SELECT * FROM cookbook_db.recipes JOIN cookbook_db.users ON (users.id = recipes.UserId) WHERE recipeName LIKE '%${search}%' OR ingredients LIKE '%${search}%' OR recipes.description LIKE '%${search}%';`,{ type: db.sequelize.QueryTypes.SELECT})
+		.then(function(data){
+				// console.log('data: ', data);
+				return res.json(data);
+			}).catch(err => res.status(401).json(err));
+	});
 
 };
