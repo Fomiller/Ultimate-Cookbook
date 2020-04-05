@@ -128,13 +128,21 @@ module.exports = function(app){
       console.log('recipe link page');
     });
 
+    app.get('/search', function(req, res) {
+      res.render('search');
+    });
+
     app.get('/search/:recipe', function(req, res) {
+      let searchBody =req.body.recipe;
       let search = req.params.recipe;
+      console.log(searchBody);
       // second argument only returns what is selected from the columns, if left out then the meta data will come back in an array.
+      // Had to use a MySql query because sequelize wouldnt work.
       db.sequelize.query(`SELECT * FROM cookbook_db.recipes JOIN cookbook_db.users ON (users.id = recipes.UserId) WHERE recipeName LIKE '%${search}%' OR ingredients LIKE '%${search}%' OR recipes.description LIKE '%${search}%';`,{ type: db.sequelize.QueryTypes.SELECT})
       .then(function(data){
           console.log('data: ', data);
           return res.render('search', {Recipe: data});
         }).catch(err => res.status(401).json(err));
     });
+
 };
