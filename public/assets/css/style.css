@@ -14,7 +14,9 @@ body {
     padding-bottom: 60px;
 }
 
-
+.accordion {
+    background-color: rgba(117, 36, 29, 0.5);
+}
 
 .footer {
     box-sizing: border-box;
