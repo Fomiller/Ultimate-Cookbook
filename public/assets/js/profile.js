@@ -10,7 +10,18 @@ $(document).ready(function() {
   let descriptionInput = $('#description');
   let chefCommentsInput = $('#chef-comments');
   let addRecipeForm = $('form.add-recipe');
+  let deleteBtn = $('.del-btn');
 
+
+  function deleteRecipe(id) {
+    $.ajax({
+      method: 'DELETE',
+      url: '/api/recipes/' + id
+    }).then(function() {
+      // return res.json(data);
+      window.location.replace('/profile');
+    });
+  }
 
   $.get('/api/userData').then( function(data){
     // console.log('userdata', data.id);
@@ -58,4 +69,10 @@ $(document).ready(function() {
     descriptionInput.val('');
     chefCommentsInput.val('');
   });
+
+  deleteBtn.on('click', function(){
+    var btnId = $(this).data('id');
+    deleteRecipe(btnId);
+  });
+
 });
