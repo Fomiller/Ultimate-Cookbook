@@ -10,14 +10,16 @@ $(document).ready(function() {
   let descriptionInput = $('#description');
   let chefCommentsInput = $('#chef-comments');
   let addRecipeForm = $('form.add-recipe');
-  // Buttons for updating Recipes
-  let deleteBtn = $('.del-btn');
-  let editBtn = $('.edit-btn');
-  let saveBtn = $('.save-btn');
-  // variables for updating Bio
-
-  // set all save buttons to display none
-  saveBtn.hide();
+  // variables for updating Recipes
+  let deleteRecipeBtn = $('.del-btn');
+  let editRecipeBtn = $('.edit-btn');
+  let updateRecipeBtn = $('.save-btn');
+  let recipeInfo = $('.recipe-info');
+  // variables for updating info
+  let editInfoBtn = $('#edit-info');
+  let updateInfoBtn = $('#update-info');
+  let userInfoInputs = $('.info-input');
+  let userInfo = $('.user-info');
 
   // delete Recipe
   function deleteRecipe(id) {
@@ -41,14 +43,27 @@ $(document).ready(function() {
     });
   }
 
+  // Update User Bio
+  function updateinfo(info){
+    //make an ajax call to update the user bio
+    $.ajax({
+        method: 'PUT',
+        url:'/api/users',
+        data:info
+      })
+    .then(function(data) {
+      window.location.replace('/profile');
+    }).catch(err=> console.log(err));
+  }
+
   // Delete Recipe button
-  deleteBtn.on('click', function() {
+  deleteRecipeBtn.on('click', function() {
     let btnId = $(this).data('id');
     deleteRecipe(btnId);
   });
 
   // edit Recipe Button
-  editBtn.on('click', function() {
+  editRecipeBtn.on('click', function() {
     let btnId = $(this).data('id');
     let save = $(this).siblings('.save-btn');
     let recipeInputs = document.querySelectorAll(`[data-edit='${btnId}']`);
@@ -62,10 +77,21 @@ $(document).ready(function() {
     });
     // display the save button
     save.toggle();
+    recipeInfo.toggle();
+  });
+
+
+  // toggleing display attributes for input fields and submit button.
+  updateRecipeBtn.hide();
+  updateInfoBtn.hide();
+  editInfoBtn.on('click', function(){
+    updateInfoBtn.toggle();
+    userInfoInputs.toggle();
+    userInfo.toggle();
   });
 
   // update Recipe Button
-  saveBtn.on('click', function() {
+  updateRecipeBtn.on('click', function() {
     let btnId = $(this).data('id');
     let descInput = $(`#desc-form${btnId}`).val();
     let instInput = $(`#inst-form${btnId}`).val();
@@ -79,6 +105,27 @@ $(document).ready(function() {
       chefComments: chefInput,
     };
     updateRecipe(dataOBJ);
+  });
+
+  userInfoInputs.hide();
+  // Update User Bio on click event
+  updateInfoBtn.on('click', function(){
+    userInfoInputs.toggle();
+    // event.preventDefault();
+    let id = $(this).data('id');
+    let userNameInput = $(`#username${id}`).val();
+    let firstNameInput = $(`#first${id}`).val();
+    let lastNameInput = $(`#last${id}`).val();
+    let bioInput = $(`#bio${id}`).val();
+    let dataOBJ = {
+      id: id,
+      username:userNameInput,
+      firstName:firstNameInput,
+      lastName:lastNameInput,
+      bio:bioInput,
+    };
+    console.log(dataOBJ);
+    updateinfo(dataOBJ);
   });
 
   $.get('/api/userData').then( function(data){
