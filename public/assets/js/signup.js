@@ -22,7 +22,7 @@ $(document).ready(function() {
 					lastName:lastName
 			}).then(function() {
 					// if signup is successful then the window is redirected to the /members endpoint.
-					window.location.replace('/members');
+					window.location.replace('/login');
 			}).catch(handleLoginErr);
 	}
 
