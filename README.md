@@ -8,7 +8,6 @@
 * [Usage](#usage)
 * [Contributing](#contributing)
 * [Deployment Application Link](#deployment-application-link)
-* [Application in Use](#application-in-use)
 
 ## Author(s)
 Forrest Miller, Charlie Brittingham, Joey Bruno
@@ -30,6 +29,3 @@ To contribute, clone this repository into your terminal, work on the project, th
 
 ## Deployment Application Link
 [Deployed Cookbook Application Link](https://blooming-stream-62429.herokuapp.com/)
-
-## Application in Use
-![Cookbook Application In Use](./public/assets/img/burger-time-demo.gif)
