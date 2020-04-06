@@ -31,19 +31,19 @@ body {
 }
 
 .del-btn, .lgt-btn {
-    background-color: #C44D42;
-    color: #e8e9eb;
+    /* background-color: #C44D42;
+    color: #e8e9eb; */
 }
 
 #add-recipe, #login-button {
-    background-color: #313638;
+    /* background-color: #313638;
     color: #e8e9eb;
     height: 2em;
-    text-align: center;
+    text-align: center; */
 }
 
 #add-recipe:hover {
-    background-color: #212517;
+    /* background-color: #212517; */
 }
 
 .footer {
