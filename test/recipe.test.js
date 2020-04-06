@@ -9,9 +9,9 @@ describe('Recipe', ()=> {
     description: 'description',
     chefComments: 'chefComments',
   };
-  describe('Test Creating a Recipe', () => {  
-    it('Should create a table with the name Recipe', async ()=> {
-      
+  describe('Test Creating a Recipe', () => {
+    it('Should create a table with the name Recipe', ()=> {
+
       dbMock.define('Recipe', newRecipe);
       expect(dbMock.isDefined('Recipe')).toBe(true);
     });

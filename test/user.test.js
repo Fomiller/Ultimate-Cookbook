@@ -12,12 +12,12 @@ describe('User', ()=>{
     bio: 'bio'
   };
 
-  describe('Test Creating a User', () => {  
-    it('Should create a table with the name User', async ()=> {
-      
+  describe('Test Creating a User', () => {
+    it('Should create a table with the name User', ()=> {
+
       dbMock.define('User', newUser);
       expect(dbMock.isDefined('User')).toBe(true);
     });
   });
-})
+});
 
