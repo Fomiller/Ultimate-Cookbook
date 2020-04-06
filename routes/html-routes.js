@@ -2,6 +2,7 @@
 var isAuthenticated = require('../config/middleware/isAuthenticated');
 const db = require('../models');
 const { Op } = require('sequelize');
+
 // const Op = db.sequelize;
 
 module.exports = function(app){
@@ -61,6 +62,7 @@ module.exports = function(app){
           lastName:usersDV.lastName,
           email:usersDV.email,
           bio:usersDV.bio,
+          userImage: usersDV.userImage
         }];
         // render the user template that has 2 partials one for rendering the users info one for handling the users recipes.
         return res.render('profile', {Recipe: recipes, User: userData});
@@ -167,5 +169,9 @@ module.exports = function(app){
     //       return res.render('search', {Recipe: data});
     //     }).catch(err => res.status(401).json(err));
     // });
+
+    app.get('/cloud', function(req, res) {
+      return res.render('cloud');
+    });
 
 };
