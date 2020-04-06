@@ -34,6 +34,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.TEXT,
       allowNull: true,
     },
+    userImage: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    }
   }, {});
 
   User.associate = function(models) {
