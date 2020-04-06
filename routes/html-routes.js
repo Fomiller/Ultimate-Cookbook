@@ -93,6 +93,7 @@ module.exports = function(app){
           lastName:usersDV.lastName,
           email:usersDV.email,
           bio:usersDV.bio,
+          userImage: usersDV.userImage
         }];
         // render the user template that has 2 partials one for rendering the users info one for handling the users recipes.
         return res.render('user', {Recipe: recipes, User: userData});
