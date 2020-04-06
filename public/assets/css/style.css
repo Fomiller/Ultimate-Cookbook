@@ -35,3 +35,7 @@ body {
     background-color: rgb(245, 116, 116);
 }
 
+textarea{
+    width: 100%;
+}
+
