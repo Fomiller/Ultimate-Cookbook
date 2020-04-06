@@ -51,13 +51,13 @@
                           <div class="row">
                             <div class="col-sm-12">
                                 <div class="p-1">
-                                  <textarea name="add-comment" class="addComment" rows="2"></textarea>
+                                  <textarea id="add-comment{{id}}" name="add-comment" class="addComment" rows="2"></textarea>
                                 </div>
                             </div>
                           </div>
                           <div class="row text-right">
                             <div class="col-sm-12">
-                              <button class="btn btn-outline-success">Add comment</button>
+                              <button data-id="{{id}}"class="btn btn-outline-success add-comment">Add comment</button>
                             </div>
                           </div>
                           </div>
@@ -70,3 +70,4 @@
     </div>
 </div>
 {{/each}}
+<script src='/assets/js/recipes.js'></script>
