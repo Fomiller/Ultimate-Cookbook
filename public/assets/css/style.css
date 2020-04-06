@@ -12,6 +12,19 @@ body {
     padding-bottom: 60px;
 }
 
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    padding-bottom: 60px;
+}
+
+.accordion {
+    background-color: rgba(117, 36, 29, 0.5);
+}
+
 .footer {
     /* box-sizing: border-box; */
     position: relative;
@@ -25,3 +38,4 @@ body {
 textarea{
     width: 100%;
 }
+
