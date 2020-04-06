@@ -1,34 +1,58 @@
 {{#each User}}
         <div class='card'>
             <div class='card-body'>
-                <div class="row">
-                    <div class="col-md-6">
-                        <h1 id='username'>{{username}}</h1>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <a href="/logout"><button class="btn btn-outline-danger">Logout</button></a>
+                <div class="row mb-2 text-right">
+                    <div class="col">
+                        <button id="edit-info" class="btn btn-outline-primary btn-sm" data-id="{{id}}">Edit</button>
+                        <button id="update-info" class="btn btn-outline-success btn-sm" data-id="{{id}}">Save</button>
+                        <a href="/logout"><button class="btn btn-outline-danger btn-sm">Logout</button></a>
                     </div>
                 </div>
-                <div class="row my-1">
-                    <div class="col-md-6">
-                        <div class="">
-                        <h5 class="d-inline text-muted" id='first-name'>{{firstName}}</h5>
-                        <h5 class="d-inline text-muted" id='first-name'>{{lastName}}</h5>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h1 id='username' class="user-info" style="width: fit-content;">{{username}}</h1>
+                        <label for="username{{id}}" class="info-input">Username</label>
+                        <input id="username{{id}}" class="info-input float-right" type="text" value="{{username}}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row user-info">
+                            <div class="col">
+                                <h5 class="d-inline text-muted" id='first-name'>{{firstName}}</h5>
+                                <h5 class="d-inline text-muted" id='first-name'>{{lastName}}</h5>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="first{{id}}" class="info-input">First Name</label>
+                                <input id="first{{id}}" class="info-input float-right" type="text" value="{{firstName}}">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="last{{id}}" class="info-input">Last Name</label>
+                                <input id="last{{id}}" class="info-input float-right" type="text" value="{{lastName}}">
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <h5>Bio:</h5>
+                        <label for="bio{{id}}">Bio:</label>
                         <div class="card">
                             <div class="card-body">
-                                <p id='#user-bio'>{{bio}}</p>
-                                <a href='/user/{{id}}'><button class='btn-info'>Edit Bio</button></a>
+                                <div class="row">
+                                    <div class="col">
+                                        <p id='#user-bio' class="user-info my-0">{{bio}}</p>
+                                        <input id="bio{{id}}" class="info-input" type="text" value="{{bio}}" style="width: 100%;">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{> profile/profile-add-recipe-block}}
             </div>
         </div>
+        {{> profile/profile-add-recipe-block}}
 {{/each}}
