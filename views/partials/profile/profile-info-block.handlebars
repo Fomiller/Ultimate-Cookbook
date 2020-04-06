@@ -1,9 +1,16 @@
 {{#each User}}
         <div class='card'>
             <div class='card-body'>
+                <div class="row mb-2 text-right">
+                    <div class="col">
+                        <button id="edit-info" class="btn btn-outline-primary btn-sm" data-id="{{id}}">Edit</button>
+                        <button id="update-info" class="btn btn-outline-success btn-sm" data-id="{{id}}">Save</button>
+                        <a href="/logout"><button class="btn btn-outline-danger btn-sm">Logout</button></a>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-4">
-                        <h1 id='username' class="user-info">{{username}}</h1>
+                        <h1 id='username' class="user-info" style="width: fit-content;">{{username}}</h1>
                         <label for="username{{id}}" class="info-input">Username</label>
                         <input id="username{{id}}" class="info-input float-right" type="text" value="{{username}}">
                     </div>
