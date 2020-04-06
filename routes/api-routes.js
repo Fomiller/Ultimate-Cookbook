@@ -49,7 +49,7 @@ module.exports = function(app){
 				username: req.user.username,
 				firstName: req.user.firstName,
 				lastName: req.user.lastName,
-				bio: req.user.bio
+				bio: req.user.bio,
 			});
 		}
 	});

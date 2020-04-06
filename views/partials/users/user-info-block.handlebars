@@ -1,17 +1,21 @@
 {{#each User}}
         <div class='card'>
             <div class='card-body'>
+
                 <div class="row">
-                    <div class="col">
-                        <h1 id='username'>{{username}}</h1>
+                    <div class="col-md-4">
+                        <img id="profile-image" class="img-thumbnail" src="{{userImage}}" alt="Profile image for {{username}}">
+                        <h1 id='username' class="user-info" style="width: fit-content;">{{username}}</h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <h4 id='first-name'>{{firstName}}</h4>
-                    </div>
-                    <div class="col-md-6">
-                        <h4 id='last-name'>{{lastName}}</h4>
+                    <div class="col-md-12">
+                        <div class="row user-info">
+                            <div class="col">
+                                <h5 class="d-inline text-muted" id='first-name'>{{firstName}}</h5>
+                                <h5 class="d-inline text-muted" id='first-name'>{{lastName}}</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
