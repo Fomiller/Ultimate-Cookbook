@@ -1,0 +1,55 @@
+{{#each Recipe}}
+  <div class='row'>
+    <div class='col my-1'>
+        <div class='card'>
+            <div class='card-body'>
+              <div class="row">
+                <div class="col-md-6">
+                  <h2>{{recipeName}}</h2>
+                </div>
+                <div class="col-md-6 text-right">
+                  <a href="/user/{{User.id}}"><h2>{{User.username}}</h2></a>
+                </div>
+              </div>
+                <h4>Description</h4>
+                <p>{{description}}</p>
+                <h4>Instructions</h4>
+                <p>{{instructions}}</p>
+                <h4>Ingredients</h4>
+                <p>{{ingredients}}</p>
+                <h4>Chef Comments</h4>
+                <p>{{chefComments}}</p>
+                <div class="accordion" id="accordionExample">
+                  <div class="card p-0">
+                    <div class="card-body p-2">
+                      <div class="card">
+                          <div class="card-header py-2" id="headingOne">
+                              <h2 class="mb-0">
+                                  <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{id}}"
+                                      aria-expanded="true" aria-controls="collapseOne">
+                                      <h4 class=" my-0">Comments</h4>
+                                  </button>
+                              </h2>
+                          </div>
+                          <div id="collapse{{id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                          {{#each Comments}}
+                          <div class="card my-2 mx-2">
+                              <div class="card-body py-1 px-2">
+                                  <div>
+                                      <div>
+                                          <p class="mb-0">{{commentBody}}</p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>  
+                          {{/each}}
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

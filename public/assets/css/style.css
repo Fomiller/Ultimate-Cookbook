@@ -4,15 +4,60 @@ body {
     color: #313638;
     background-color: #e8e9eb;
 }
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+.content-wrapper {
+    padding-bottom: 60px;
+}
+
+.recipe-name {
+    color: #313638;
+    font-weight: 400;
+}
+
+.my-recipe, .add-recipe-title, .browse-recipe-title {
+    font-weight: 700;
+}
+
+.page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    padding-bottom: 60px;
+}
+
+.del-btn, .lgt-btn {
+    background-color: #C44D42;
+    color: #e8e9eb;
+}
+
+#add-recipe, #login-button {
+    background-color: #313638;
+    color: #e8e9eb;
+    height: 2em;
+    text-align: center;
+}
+
+#add-recipe:hover {
+    background-color: #212517;
+}
 
 .footer {
-    box-sizing: border-box;
-    position: absolute;
+    /* box-sizing: border-box; */
+    position: relative;
     bottom: 0;
     width: 100%;
     height: 60px; /* Set the fixed height of the footer here */
     line-height: 60px; /* Vertically center the text there */
-    background-color: #eee;
+    background-color: #313638;
+    color: #e8e9eb;
 }
 
+textarea{
+    width: 100%;
+}
 

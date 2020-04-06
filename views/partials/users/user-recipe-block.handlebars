@@ -1,0 +1,45 @@
+{{!-- this renders a user that is not you --}}
+{{#each Recipe}}
+<div class="card">
+    <div class="card-header" id="headingOne">
+        <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{{id}}"
+                aria-expanded="true" aria-controls="collapseOne">
+                <h3>{{recipeName}}</h3>
+            </button>
+        </h2>
+    </div>
+
+    <div id="collapse{{id}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body">
+            <div>
+                <h5>Description:</h5>
+                <p>{{description}}</p>
+                <h5>Instructions:</h5>
+                <p>{{instructions}}</p>
+                <h5>Ingredients:</h5>
+                <p>{{ingredients}}</p>
+                <h5>Chef Comments:</h5>
+                <p>{{chefComments}}</p>
+                <p>{{Rating}}</p>
+                <p>{{Category}}</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                {{#each Comments}}
+                <div class="card my-2 mx-2">
+                    <div class="card-body py-1 px-2">
+                        <div>
+                            <div>
+                                <p class="mb-0">{{commentBody}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}

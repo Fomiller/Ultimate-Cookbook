@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
 <head>
 	<meta charset='UTF-8'>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Ultimate Cookbook</title>
 	{{!-- Roboto Font --}}
 	<link href='https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap' rel='stylesheet'>
@@ -24,9 +25,31 @@
 </head>
 
 <body>
+		{{!-- Nav Bar --}}
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
+			{{!-- Nav Bar Container --}}
+			<div class="container">
+				<a class="navbar-brand" href="#">Ultimate CookBook</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+					<div class="navbar-nav">
+						<a class="nav-item nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+						<a class="nav-item nav-link" href="/recipes">All Recipes</a>
+						<a class="nav-item nav-link" href="/search">Search</a>
+						<a class="nav-item nav-link" href="/signup">Sign-up</a>
+					</div>
+				</div>
+			</div>
+		</nav>
 	{{!-- wraps all content in a container --}}
-	<div class='container h-100'>
-		{{{ body }}}
+	<div class='container page-container'>
+		{{!-- content wrapper --}}
+		{{!-- <div class="content-wrapper"> --}}
+			{{{ body }}}
+		{{!-- footer --}}
+		{{!-- </div> --}}
 	</div>
 	<footer class='footer text-center'>
 		<div class='container'>
@@ -38,7 +61,6 @@
 	<script src="/assets/js/login.js"></script>
 	<script src="/assets/js/signup.js"></script>
 	<script src="/assets/js/members.js"></script>
-	<script src='/assets/js/add-recipe.js'></script>
-</body>
+	<script src='/assets/js/add-recipe.js'></script></body>
 
 </html>
