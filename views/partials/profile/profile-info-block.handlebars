@@ -1,15 +1,10 @@
 {{#each User}}
         <div class='card'>
             <div class='card-body'>
-                <div class="row mb-2 text-right">
-                    <div class="col">
-                        <button id="edit-info" class="btn btn-outline-primary btn-sm" data-id="{{id}}">Edit</button>
-                        <button id="update-info" class="btn btn-outline-success btn-sm" data-id="{{id}}">Save</button>
-                        <a href="/logout"><button class="btn btn-outline-danger btn-sm">Logout</button></a>
-                    </div>
-                </div>
+
                 <div class="row">
                     <div class="col-md-4">
+                        <img id="profile-image" class="img-thumbnail" src="{{userImage}}" alt="Profile image for {{username}}">
                         <h1 id='username' class="user-info" style="width: fit-content;">{{username}}</h1>
                         <label for="username{{id}}" class="info-input">Username</label>
                         <input id="username{{id}}" class="info-input float-right" type="text" value="{{username}}">
@@ -35,6 +30,12 @@
                                 <input id="last{{id}}" class="info-input float-right" type="text" value="{{lastName}}">
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label for="image{{id}}" class="info-input">Image</label>
+                                <div id="cloud-image" class=""></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -52,7 +53,41 @@
                         </div>
                     </div>
                 </div>
+                    <div class="row mb-2 text-md-right">
+                    <div class="col">
+                        <button id="edit-info" class="btn btn-outline-primary btn-sm" data-id="{{id}}">Edit</button>
+                        <button id="upload_widget" class="btn btn-sm cloudinary-button" style="padding: .25rem .5rem; line-height: 1.5">Upload files</button>
+                        <button id="update-info" class="btn btn-outline-success btn-sm" data-id="{{id}}">Save</button>
+                        <a href="/logout"><button class="btn btn-outline-danger btn-sm">Logout</button></a>
+                    </div>
+                </div>
             </div>
         </div>
         {{> profile/profile-add-recipe-block}}
 {{/each}}
+
+{{!-- import cloudinary custom javaScript --}}
+<script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+{{!-- define cloud name globally --}}
+<script>
+  cloudinary.setCloudName("dpnaj92ox");
+</script>
+{{!-- set up the cloudinary widget --}}
+<script type="text/javascript">  
+var myWidget = cloudinary.createUploadWidget({
+  cloudName: 'dpnaj92ox', 
+  uploadPreset: 'qeizhoo2',
+  thumbnails: '#cloud-image'
+  }, (error, result) => { 
+    if (!error && result && result.event === "success") { 
+      console.log('Done! Here is the image info: ', result.info); 
+      console.log('Done! URL: ', result.info.url);
+    }
+  }
+)
+
+document.getElementById("upload_widget").addEventListener("click", function(){
+    myWidget.open();
+  }, false);
+  
+</script>
