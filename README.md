@@ -3,6 +3,7 @@
 ## Table of Contents
 * [Author(s)](#author(s))
 * [Description](#description)
+* [User Story](#user-story)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Contributing](#contributing)
@@ -14,6 +15,9 @@ Forrest Miller, Charlie Brittingham, Joey Bruno
 
 ## Description
 This is a cookbook application where you can add, update, and delete various recipes you have created. 
+
+## User Story
+As a chef, I want to create recipes and post them online, So that I can share these recipes to other food loving people.
 
 ## Installation
 To install this application you clone the SSH Key from the main hub page of this repository and you paste that clone link into your Terminal with git clone.
