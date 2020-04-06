@@ -20,6 +20,23 @@ $(document).ready(function() {
   let updateInfoBtn = $('#update-info');
   let userInfoInputs = $('.info-input');
   let userInfo = $('.user-info');
+  let uploadWidget = $('#upload_widget');
+  let test= $('#test');
+  test.on('click', function() {
+    let cloudThumbnail = $('.cloudinary-thumbnail');
+    let cloudData =cloudThumbnail.data('cloudinary');
+    console.log('data.url: ', cloudData.url);
+  })
+  // cloudinary.setCloudName("dpnaj92ox");
+  // let myWidget = cloudinary.createUploadWidget({
+  //   cloudName: 'dpnaj92ox',
+  //   uploadPreset: 'qeizhoo2',
+  //   thumbnails: '#imagehere'}, (error, result) => {
+  //     if (!error && result && result.event === 'success') {
+  //       console.log('Done! Here is the image info: ', result.info);
+  //     }
+  //   }
+  // );
 
   // delete Recipe
   function deleteRecipe(id) {
@@ -84,7 +101,9 @@ $(document).ready(function() {
   // toggleing display attributes for input fields and submit button.
   updateRecipeBtn.hide();
   updateInfoBtn.hide();
+  uploadWidget.hide();
   editInfoBtn.on('click', function(){
+    uploadWidget.toggle();
     updateInfoBtn.toggle();
     userInfoInputs.toggle();
     userInfo.toggle();
@@ -107,10 +126,27 @@ $(document).ready(function() {
     updateRecipe(dataOBJ);
   });
 
+  // open upload widget when upload file button is clicked.
+  uploadWidget.on('click', function(){
+      myWidget.open();
+  }, false);
+
+  // test.on('click', function() {
+  //   let cloudThumbnail = $('.cloudinary-thumbnail');
+  //   let cloudData =cloudThumbnail.data('cloudinary');
+  //   console.log('data.url: ', cloudData.url);
+  // })
+
   userInfoInputs.hide();
   // Update User Bio on click event
   updateInfoBtn.on('click', function(){
     userInfoInputs.toggle();
+    let cloudData = '';
+    if($('.cloudinary-thumbnail').length > 0) {
+      let cloudThumbnail = $('.cloudinary-thumbnail');
+      cloudData = cloudThumbnail.data('cloudinary');
+    }
+    console.log(cloudData);
     // event.preventDefault();
     let id = $(this).data('id');
     let userNameInput = $(`#username${id}`).val();
@@ -123,8 +159,11 @@ $(document).ready(function() {
       firstName:firstNameInput,
       lastName:lastNameInput,
       bio:bioInput,
+      userImage:cloudData.url,
     };
-    console.log(dataOBJ);
+    // console.log(dataOBJ);
+    // console.log(cloudThumbnail);
+    // console.log('data: ', cloudThumbnail.data('cloudinary'));
     updateinfo(dataOBJ);
   });
 
