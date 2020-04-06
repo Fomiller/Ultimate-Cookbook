@@ -4,7 +4,7 @@
   "description": "Group Project 2",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "start": "node server.js",
     "watch": "nodemon server.js"
   },
@@ -31,6 +31,7 @@
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
-    "eslint": "^6.8.0"
+    "eslint": "^6.8.0",
+    "jest": "^25.2.7"
   }
 }

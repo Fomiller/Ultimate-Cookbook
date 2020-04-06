@@ -1,0 +1,15 @@
+<div class='row h-100'>
+    <div class='col my-auto'>
+        {{> profile/profile-info-block}}
+
+        <div class="card mt-5 mb-2">
+            <div class="card-body">
+                <h3 class="text-center">My Recipes</h3>
+            </div>
+        </div>
+        <div class="accordion" id="accordionExample">
+            {{> profile/profile-recipe-block}}
+        </div>
+    </div>
+</div>
+<script src='/assets/js/profile.js'></script>
