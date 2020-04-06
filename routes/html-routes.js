@@ -167,5 +167,5 @@ module.exports = function(app){
     //       return res.render('search', {Recipe: data});
     //     }).catch(err => res.status(401).json(err));
     // });
-
 };
+
