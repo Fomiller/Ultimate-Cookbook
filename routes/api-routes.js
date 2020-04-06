@@ -173,7 +173,16 @@ module.exports = function(app){
 			console.log(r);
 			return res.json(r);
 		});
-    });
+		});
+
+		app.post('/api/comments', function(req, res) {
+			db.Comment.create({
+				commentBody: req.body.commentBody,
+				RecipeId: req.body.RecipeId,
+			}).then(function(data) {
+				return res.json(data);
+			});
+		});
 
     //add a recipe. req.body is already formatted to match our Recipe model
     app.post('/api/add-recipe', function(req, res){
