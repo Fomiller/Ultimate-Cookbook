@@ -11,7 +11,7 @@ const db = {};
 let sequelize;
 if(process.env.JAWSDB_URL && process.env.NODE_ENV === 'production'){
   sequelize = new Sequelize(process.env.JAWSDB_URL);
-} else {
+}else {
   if (config.use_env_variable) {
     sequelize = new Sequelize(process.env[config.use_env_variable], config);
   } else {
