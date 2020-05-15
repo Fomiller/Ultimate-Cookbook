@@ -15,6 +15,8 @@ Forrest Miller, Charlie Brittingham, Joey Bruno
 ## Description
 This is a cookbook application where you can add, update, and delete various recipes you have created. 
 
+<img src="./public/assets/images/cookbook_01.PNG" />
+
 ## User Story
 As a chef, I want to create recipes and post them online, So that I can share these recipes to other food loving people.
 
